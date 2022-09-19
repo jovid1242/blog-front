@@ -1,0 +1,70 @@
+@import "../public/css/bootstrap.min.css";
+@import "../public/css/simple-line-icons.css";
+@import "../public/css/slick.css";
+@import "../public/css/style.css";
+@import "../public/css/all.min.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.w40 {
+  width: 40px;
+  height: 40px;
+}
+.w40 span {
+  width: 40px !important;
+  height: 40px !important;
+  position: relative !important;
+}
+
+.w40 img {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover !important;
+}
+
+.w-auto-40 {
+  width: 40px;
+  height: 10px;
+}
+.w-auto-40 span {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 40px !important;
+  height: 10px !important;
+  position: relative !important;
+}
+
+.w-auto-40 img {
+  width: 40px !important;
+  height: 10px !important;
+  object-fit: cover !important;
+}
+.imgCover {
+  object-fit: cover !important;
+}
+.w100 {
+  width: 100%;
+  height: 250px;
+}
+
+.w100 img {
+  width: 100% !important;
+  height: 250px !important;
+  object-fit: cover !important;
+}
