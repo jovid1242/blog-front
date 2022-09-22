@@ -57,13 +57,13 @@ const PopularPosts = ({ data }) => {
                         <Image
                           src={elm?.imageUrl}
                           style={{
-                            width: 60,
-                            height: 60,
+                            width: 50,
+                            height: 50,
                             borderRadius: "50%",
                             objectFit: "cover",
                           }}
-                          width={1000}
-                          height={1000}
+                          width={50}
+                          height={50}
                           priority
                           alt="post-title"
                         />

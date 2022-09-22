@@ -12,12 +12,14 @@ const Hero = () => {
   const dispatch = useDispatch();
   const popularPosts = useSelector((state) => state.popularPosts);
   const resentPosts = useSelector((state) => state.resentPosts);
-  const posts = useSelector((state) => state.posts);
+  // const posts = useSelector((state) => state.posts);
 
   let data = {
     popularPosts,
     resentPosts,
   };
+
+  console.log("popularPosts", popularPosts);
 
   useEffect(() => {
     dispatch(fetchPopularPost());

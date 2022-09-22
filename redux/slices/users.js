@@ -1,13 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "../../components/http";
 
-export const fetchAuthors = createAsyncThunk(
-  "posts/fetchPopularPost",
-  async () => {
-    const { data } = await http.get("users");
-    return data.users;
-  }
-);
+export const fetchAuthors = createAsyncThunk("posts/fetchAuthors", async () => {
+  const { data } = await http.get("users");
+  return data.users;
+});
 
 const initialState = {
   users: {
