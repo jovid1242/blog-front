@@ -21,6 +21,10 @@ const FullPost = ({ post }) => {
     setTextPost(textPostToHtml);
   };
 
+  const getAuthor = () => {
+    return users.items.filter((elm) => elm.id === post.user_id);
+  };
+
   useEffect(() => {
     parseText();
   }, []);
@@ -46,9 +50,7 @@ const FullPost = ({ post }) => {
                   height={40}
                 />
                 <div style={{ marginLeft: "12px" }}>
-                  {users.items.map((elm) => {
-                    return <>{elm.id == post.user_id ? elm.name : "Repost"}</>;
-                  })}
+                  {getAuthor() && "Repost"}
                 </div>
               </li>
               <li className="list-inline-item">

@@ -15,6 +15,10 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
   const [textPost, setTextPost] = useState("");
   const { users } = useSelector((state) => state.users);
 
+  const getAuthor = () => {
+    return users.items.filter((elm) => elm.id === author);
+  };
+
   useEffect(() => {
     const textPostToHtml = ReactHtmlParser(short.shortText(text, 350));
     setTextPost(textPostToHtml);
@@ -58,9 +62,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
                 height={40}
               />
               <div style={{ marginLeft: "12px" }}>
-                {users.items?.map((elm) => {
-                  return <>{elm.id == author ? elm.name : "Repost"}</>;
-                })}
+                {getAuthor() && "Repost"}
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">

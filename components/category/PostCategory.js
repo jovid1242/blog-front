@@ -18,13 +18,18 @@ moment.locale("ru");
 
 const PostCategory = ({ post }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const { category } = useSelector((state) => state.category);
   const { users } = useSelector((state) => state.users);
-  const dispatch = useDispatch();
 
   const filterCategory = category?.items.filter(
     (elm) => elm.id == router.query.id
   );
+
+  const getAuthor = () => {
+    return users.items.filter((elm) => elm.id === post.user_id);
+  };
 
   const [textPost, setTextPost] = useState("");
 
@@ -80,9 +85,7 @@ const PostCategory = ({ post }) => {
                 height={40}
               />
               <div style={{ marginLeft: "12px" }}>
-                {users.items.map((elm) => {
-                  return <>{elm.id == post.user_id ? elm.name : "Repost"}</>;
-                })}
+                {getAuthor() && "Repost"}
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
