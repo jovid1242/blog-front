@@ -1,7 +1,15 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchAuthors } from "../../redux/slices/users";
 import LSidebar from "../sidebar/LSidebar";
 import Sidebar from "../sidebar/Sidebar";
 
 const Main = ({ store }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAuthors());
+  }, []);
   return (
     <section className="main-content">
       <div className="container-xl">

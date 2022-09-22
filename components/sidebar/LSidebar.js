@@ -34,6 +34,7 @@ const LSidebar = ({ posts }) => {
                   id={post.id}
                   title={post.title}
                   imageUrl={post.imageUrl}
+                  author={post.user_id}
                   view={post.viewCount}
                   text={post.text}
                   date={post.createdAt}

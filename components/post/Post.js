@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useSelector } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
+
+import Link from "next/link";
+import Image from "next/image";
 import * as moment from "moment";
 import { short } from "../../utils/short";
+
 import "moment/locale/ru";
-import Image from "next/image";
 import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
 
-const Post = ({ title, text, id, date, imageUrl, view }) => {
+const Post = ({ title, text, id, date, imageUrl, author, view }) => {
   const [textPost, setTextPost] = useState("");
+  const { users } = useSelector((state) => state.users);
+
   useEffect(() => {
     const textPostToHtml = ReactHtmlParser(short.shortText(text, 350));
     setTextPost(textPostToHtml);
@@ -52,7 +57,11 @@ const Post = ({ title, text, id, date, imageUrl, view }) => {
                 width={40}
                 height={40}
               />
-              <div style={{ marginLeft: "12px" }}>Repost</div>
+              <div style={{ marginLeft: "12px" }}>
+                {users.items?.map((elm) => {
+                  return <>{elm.id == author ? elm.name : "Repost"}</>;
+                })}
+              </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">

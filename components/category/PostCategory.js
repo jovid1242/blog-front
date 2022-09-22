@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactHtmlParser from "react-html-parser";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAuthors } from "../../redux/slices/users";
 
 // next
 import Link from "next/link";
@@ -18,6 +19,8 @@ moment.locale("ru");
 const PostCategory = ({ post }) => {
   const router = useRouter();
   const { category } = useSelector((state) => state.category);
+  const { users } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
   const filterCategory = category?.items.filter(
     (elm) => elm.id == router.query.id
@@ -28,6 +31,10 @@ const PostCategory = ({ post }) => {
   useEffect(() => {
     const textPostToHtml = ReactHtmlParser(short.shortText(post.text, 100));
     setTextPost(textPostToHtml);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchAuthors());
   }, []);
 
   return (
@@ -72,7 +79,11 @@ const PostCategory = ({ post }) => {
                 width={40}
                 height={40}
               />
-              <div style={{ marginLeft: "12px" }}>Repost</div>
+              <div style={{ marginLeft: "12px" }}>
+                {users.items.map((elm) => {
+                  return <>{elm.id == post.user_id ? elm.name : "Repost"}</>;
+                })}
+              </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">
