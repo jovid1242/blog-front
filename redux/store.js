@@ -5,6 +5,7 @@ import popularPostsSlice from "./slices/popularPosts";
 import resentPostsSlice from "./slices/resentPosts";
 import categorySlice from "./slices/category";
 import usersSlice from "./slices/users";
+import authSlice from "./slices/auth/authSlice";
 
 const combineReducer = combineReducers({
   posts: postsSlice,
@@ -12,6 +13,7 @@ const combineReducer = combineReducers({
   resentPosts: resentPostsSlice,
   category: categorySlice,
   users: usersSlice,
+  auth: authSlice,
 });
 
 export const makestore = () =>

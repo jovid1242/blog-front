@@ -1,14 +1,12 @@
 import "../styles/globals.css";
+
+import "antd/dist/antd.css";
 import { wrapper } from "../redux/store";
 import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <Script
-        strategy="lazyOnload"
-        src="https://www.googletagmanager.com/gtag/js?id=G-3GPGC9LTM9"
-      /> */}
       <Script id="ya-analytics">
         {`
             (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

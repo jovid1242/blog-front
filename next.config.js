@@ -4,10 +4,18 @@ const nextConfig = {
   swcMinify: true,
 };
 
+const path = require("path");
+
 module.exports = nextConfig;
 
 module.exports = {
   images: {
     domains: ["backend.1026361-ca72388.tmweb.ru"],
+  },
+};
+
+module.exports = {
+  sassOptions: {
+    includePaths: [path.join(__dirname, "styles")],
   },
 };
