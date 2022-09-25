@@ -6,7 +6,7 @@ import { Button, Form, Input } from "antd";
 // import { UserOutlined } from "@ant-design/icons";
 
 // slice
-import { fetchLogin } from "../../redux/slices/auth/authSlice";
+import { fetchAuth } from "../../redux/slices/auth/authSlice";
 
 // components
 import Header from "../../components/header/Header";
@@ -29,7 +29,7 @@ const login = () => {
   };
 
   const onFinish = (values) => {
-    dispatch(fetchLogin(values));
+    dispatch(fetchAuth(values));
     route.push("/profile");
   };
 
@@ -38,7 +38,7 @@ const login = () => {
       <Header />
       <div className={style.form}>
         <div className="form_head">
-          <h2>Авторизация</h2>
+          <h2>Регистрация</h2>
           {auth.isError && (
             <div>
               <p type="danger">{auth.isError}</p>
@@ -55,6 +55,18 @@ const login = () => {
             validateMessages={validateMessages}
             autoComplete="off"
           >
+            <Form.Item
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Пожалуйста, введите ваше имя пользователя!",
+                },
+              ]}
+            >
+              <Input placeholder="Логин" />
+            </Form.Item>
+
             <Form.Item name="email" rules={[{ required: true, type: "email" }]}>
               <Input placeholder="E-mail" />
             </Form.Item>
@@ -79,15 +91,15 @@ const login = () => {
                 block
                 ghost
               >
-                Войти
+                Отправить
               </Button>
             </Form.Item>
           </Form>
         </div>
         <div className="form_footer">
-          Нету аккаунта ?{" "}
-          <Link href="/auth/register">
-            <a>Регистрация</a>
+          Есть аккаунт ?{" "}
+          <Link href="/auth/login">
+            <a>Вход</a>
           </Link>
         </div>
       </div>

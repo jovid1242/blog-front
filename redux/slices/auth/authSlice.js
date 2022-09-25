@@ -1,8 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "../../../components/http";
 
-export const fetchAuth = createAsyncThunk("posts/login", async (user) => {
+export const fetchLogin = createAsyncThunk("auth/login", async (user) => {
   const { data } = await http.post("login", user);
+  return data;
+});
+
+export const fetchRegister = createAsyncThunk("auth/register", async (user) => {
+  const { data } = await http.post("register", user);
   return data;
 });
 
@@ -30,19 +35,39 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchAuth.pending]: (state) => {
+    [fetchLogin.pending]: (state) => {
       state.isAuth = false;
       state.user = {};
       state.status = true;
     },
-    [fetchAuth.fulfilled]: (state, action) => {
+    [fetchLogin.fulfilled]: (state, action) => {
       state.isAuth = true;
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
       setToken(action.payload.accessToken);
       state.status = false;
     },
-    [fetchAuth.rejected]: (state, action) => {
+    [fetchLogin.rejected]: (state, action) => {
+      console.log("action.payload", action.payload);
+      state.isAuth = false;
+      state.isError = "action.payload";
+      state.user = {};
+      state.status = false;
+    },
+    // resgister
+    [fetchRegister.pending]: (state) => {
+      state.isAuth = false;
+      state.user = {};
+      state.status = true;
+    },
+    [fetchRegister.fulfilled]: (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload.user;
+      state.token = action.payload.accessToken;
+      setToken(action.payload.accessToken);
+      state.status = false;
+    },
+    [fetchRegister.rejected]: (state, action) => {
       console.log("action.payload", action.payload);
       state.isAuth = false;
       state.isError = "action.payload";

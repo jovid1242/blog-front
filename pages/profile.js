@@ -24,7 +24,7 @@ const Profile = () => {
         </center>
       ) : (
         <div>
-          <h1>Your Profile</h1>
+          <h1>Your Profile (Beta Test 2.0.1)</h1>
         </div>
       )}
     </>
