@@ -34,6 +34,16 @@ const Header = () => {
       href: "/category/5",
       text: "Кино",
     },
+    {
+      id: 6,
+      href: "/auth/login",
+      text: "Login",
+    },
+    {
+      id: 7,
+      href: "/auth/register",
+      text: "Register",
+    },
   ];
 
   useMemo(() => {

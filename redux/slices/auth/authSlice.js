@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setCookie, getCookies, deleteCookie } from "cookies-next";
 import http from "../../../components/http";
 
 export const fetchLogin = createAsyncThunk("auth/login", async (user) => {
@@ -11,15 +12,10 @@ export const fetchRegister = createAsyncThunk("auth/register", async (user) => {
   return data;
 });
 
-export const getToken = () => window.localStorage.getItem("token");
-export const setToken = (token) =>
-  window.localStorage.setItem("token", JSON.stringify(token));
-export const removeToken = () => window.localStorage.removeItem("token");
-
 const initialState = {
   isAuth: false,
   user: {},
-  token: "",
+  token: getCookies("token"),
   status: false,
   isError: false,
 };
@@ -31,7 +27,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = {};
       state.isAuth = false;
-      removeToken();
+      deleteCookie("token");
     },
   },
   extraReducers: {
@@ -44,11 +40,10 @@ export const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
-      setToken(action.payload.accessToken);
+      setCookie("token", action.payload.accessToken, { maxAge: 60 * 6 * 24 });
       state.status = false;
     },
     [fetchLogin.rejected]: (state, action) => {
-      console.log("action.payload", action.payload);
       state.isAuth = false;
       state.isError = "action.payload";
       state.user = {};
@@ -64,11 +59,10 @@ export const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
-      setToken(action.payload.accessToken);
+      setCookie("token", action.payload.accessToken, { maxAge: 60 * 6 * 24 });
       state.status = false;
     },
     [fetchRegister.rejected]: (state, action) => {
-      console.log("action.payload", action.payload);
       state.isAuth = false;
       state.isError = "action.payload";
       state.user = {};

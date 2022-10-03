@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 // antd
 import { Button, Form, Input } from "antd";
@@ -13,9 +15,8 @@ import Header from "../../components/header/Header";
 
 // styles
 import style from "../../styles/login.module.scss";
-import Link from "next/link";
 
-const login = () => {
+const Login = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const route = useRouter();
@@ -95,4 +96,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
