@@ -7,6 +7,9 @@ import Image from "next/image";
 import * as moment from "moment";
 import { short } from "../../utils/short";
 
+// utils
+import imageLoader from "../../utils/imageLoader";
+
 import "moment/locale/ru";
 import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
@@ -35,6 +38,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
             <a className="inner w100">
               <Image
                 src={imageUrl}
+                loader={imageLoader}
                 style={{
                   width: "100%",
                   height: 200,

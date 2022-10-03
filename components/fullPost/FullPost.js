@@ -27,6 +27,7 @@ const FullPost = ({ post }) => {
 
   useEffect(() => {
     parseText();
+    console.log("post", post);
   }, []);
 
   useEffect(() => {
@@ -61,7 +62,7 @@ const FullPost = ({ post }) => {
         </div>
         <div className="featured-image">
           <Image
-            src={post?.imageUrl}
+            src={post.imageUrl}
             width={1000}
             height={500}
             className="imgCover"
