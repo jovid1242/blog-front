@@ -11,6 +11,7 @@ import ReactHtmlParser from "react-html-parser";
 // utils
 import imageLoader from "../../utils/imageLoader";
 import { short } from "../../utils/short";
+import getAuthor from "../../utils/author";
 
 // api
 import { API_URL } from "../api";
@@ -23,14 +24,6 @@ moment.locale("ru");
 const Post = ({ title, text, id, date, imageUrl, author, view }) => {
   const [textPost, setTextPost] = useState("");
   const { users } = useSelector((state) => state.users);
-
-  const getAuthor = () => {
-    const username = users.items.filter((elm) => elm.id === author);
-    if (username.length > 0) {
-      return username[0].name;
-    }
-    return "Repost";
-  };
 
   useEffect(() => {
     const textPostToHtml = ReactHtmlParser(short.shortText(text, 350));
@@ -76,7 +69,9 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
                 height={40}
                 layout="intrinsic"
               />
-              <div style={{ marginLeft: "12px" }}>{getAuthor()}</div>
+              <div style={{ marginLeft: "12px" }}>
+                {getAuthor(users.items, author)}
+              </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">

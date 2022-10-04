@@ -48,7 +48,6 @@ export const authSlice = createSlice({
       state.status = false;
     },
     [fetchLogin.rejected]: (state, action) => {
-      console.log("action.payload", action.payload);
       state.isAuth = false;
       state.isError = "action.payload";
       state.user = {};
@@ -68,7 +67,6 @@ export const authSlice = createSlice({
       state.status = false;
     },
     [fetchRegister.rejected]: (state, action) => {
-      console.log("action.payload", action.payload);
       state.isAuth = false;
       state.isError = "action.payload";
       state.user = {};

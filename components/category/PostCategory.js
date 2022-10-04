@@ -7,7 +7,10 @@ import { fetchAuthors } from "../../redux/slices/users";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
+
+// utils
 import { short } from "../../utils/short";
+import getAuthor from "../../utils/author";
 
 // api
 import { API_URL } from "../api";
@@ -31,10 +34,6 @@ const PostCategory = ({ post }) => {
     (elm) => elm.id == router.query.id
   );
 
-  const getAuthor = () => {
-    return users.items.filter((elm) => elm.id === post.user_id);
-  };
-
   const [textPost, setTextPost] = useState("");
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const PostCategory = ({ post }) => {
     <div className="col-sm-6">
       <div className="post post-grid rounded bordered">
         <div className="thumb top-rounded">
-          <Link href="/category">
+          <Link href={`/category/${router.query.id}`}>
             <a className="category-badge position-absolute">
               {filterCategory[0]?.title}
             </a>
@@ -82,14 +81,14 @@ const PostCategory = ({ post }) => {
             <li className="list-inline-item d-flex align-items-center">
               <Image
                 src={`${API_URL}image/1.jpg`}
-                className="author mr-2"
+                className="w40 mr-2"
                 alt="author"
                 style={{ borderRadius: "50%" }}
                 width={40}
                 height={40}
               />
               <div style={{ marginLeft: "12px" }}>
-                {getAuthor() && "Repost"}
+                {getAuthor(users.items, post.user_id)}
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">

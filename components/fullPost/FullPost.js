@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthors } from "../../redux/slices/users";
 
+// utils
+import getAuthor from "../../utils/author";
+
 // parser html
 import ReactHtmlParser from "react-html-parser";
 
@@ -25,13 +28,8 @@ const FullPost = ({ post }) => {
     setTextPost(textPostToHtml);
   };
 
-  const getAuthor = () => {
-    return users.items.filter((elm) => elm.id === post.user_id);
-  };
-
   useEffect(() => {
     parseText();
-    console.log("post", post);
   }, []);
 
   useEffect(() => {
@@ -48,14 +46,14 @@ const FullPost = ({ post }) => {
               <li className="list-inline-item d-flex align-items-center">
                 <Image
                   src={`${API_URL}image/1.jpg`}
-                  className="author mr-2"
+                  className="w40 mr-2"
                   alt="author"
                   style={{ borderRadius: "50%" }}
                   width={40}
                   height={40}
                 />
                 <div style={{ marginLeft: "12px" }}>
-                  {getAuthor() && "Repost"}
+                  {getAuthor(users.items, post.user_id)}
                 </div>
               </li>
               <li className="list-inline-item">
