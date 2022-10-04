@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthors } from "../../redux/slices/users";
 
+// parser html
 import ReactHtmlParser from "react-html-parser";
+
+// api
+import { API_URL } from "../api";
 
 import * as moment from "moment";
 import "moment/locale/ru";
@@ -43,7 +47,7 @@ const FullPost = ({ post }) => {
             <ul className="meta list-inline mb-0 d-flex align-items-center">
               <li className="list-inline-item d-flex align-items-center">
                 <Image
-                  src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                  src={`${API_URL}image/1.jpg`}
                   className="author mr-2"
                   alt="author"
                   style={{ borderRadius: "50%" }}
@@ -62,7 +66,7 @@ const FullPost = ({ post }) => {
         </div>
         <div className="featured-image">
           <Image
-            src={post.imageUrl}
+            src={`${API_URL}image/${post.imageUrl}`}
             width={1000}
             height={500}
             className="imgCover"

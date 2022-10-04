@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
+// api
+import { API_URL } from "../api";
+
 const Header = () => {
   const router = useRouter();
   const [activeBtn, setActiveBtn] = useState(router.query.id);
@@ -48,7 +51,7 @@ const Header = () => {
             <Link href="/">
               <a className="navbar-brand w40">
                 <Image
-                  src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                  src={`${API_URL}image/1.jpg`}
                   style={{
                     width: "40px",
                     height: "40px",
@@ -56,7 +59,7 @@ const Header = () => {
                   }}
                   width={50}
                   height={50}
-                  layout="fill"
+                  layout="responsive"
                   alt="logo"
                 />
               </a>
@@ -134,11 +137,11 @@ const Header = () => {
           <Link href="/">
             <a className="navbar-brand w40">
               <Image
-                src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                src={`${API_URL}image/1.jpg`}
                 style={{ borderRadius: "50%" }}
                 width={40}
                 height={40}
-                layout="fill"
+                layout="responsive"
                 alt="logo"
               />
             </a>

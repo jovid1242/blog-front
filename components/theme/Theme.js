@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+// api
+import { API_URL } from "../api";
+
 const Theme = ({ category }) => {
   return (
     <div className="widget rounded">
@@ -8,10 +11,10 @@ const Theme = ({ category }) => {
         <h3 className="widget-title">Исследуйте темы</h3>
         <div className="w-auto-40">
           <Image
-            src="http://backend.1026361-ca72388.tmweb.ru/api/image/wave.svg"
-            width={"100%"}
-            height={"100%"}
-            layout="fill"
+            src={`${API_URL}image/wave.svg`}
+            width={30}
+            height={30}
+            layout="responsive"
             className="wave"
             alt="wave"
           />

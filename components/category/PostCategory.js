@@ -9,9 +9,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { short } from "../../utils/short";
 
+// api
+import { API_URL } from "../api";
+
 // momentjs
 import * as moment from "moment";
 import "moment/locale/ru";
+
 // icon
 import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
@@ -59,7 +63,7 @@ const PostCategory = ({ post }) => {
             <a>
               <div className="inner">
                 <Image
-                  src={post.imageUrl}
+                  src={`${API_URL}image/${post.imageUrl}`}
                   style={{
                     width: "100%",
                   }}
@@ -77,7 +81,7 @@ const PostCategory = ({ post }) => {
           <ul className="meta list-inline mb-3 d-flex align-items-center">
             <li className="list-inline-item d-flex align-items-center">
               <Image
-                src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                src={`${API_URL}image/1.jpg`}
                 className="author mr-2"
                 alt="author"
                 style={{ borderRadius: "50%" }}

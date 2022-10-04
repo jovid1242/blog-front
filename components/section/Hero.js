@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
+
+//
 import { fetchPopularPost } from "../../redux/slices/popularPosts";
 import { fetchResentPost } from "../../redux/slices/resentPosts";
+
+// axios
 import http from "../http";
 
+// components
 import PostTabs from "../postTabs/PostTabs";
-import Link from "next/link";
+
+// api
+import { API_URL } from "../api";
 
 const Hero = () => {
   const [banner, setBanner] = useState({});
@@ -18,8 +26,6 @@ const Hero = () => {
     popularPosts,
     resentPosts,
   };
-
-  console.log("popularPosts", popularPosts);
 
   useEffect(() => {
     dispatch(fetchPopularPost());
@@ -55,8 +61,7 @@ const Hero = () => {
                     <div
                       className="inner data-bg-image"
                       style={{
-                        backgroundImage: `url(
-                        ${banner?.imageUrl}
+                        backgroundImage: `url(${API_URL}image/${banner?.imageUrl}
                       )`,
                       }}
                     ></div>

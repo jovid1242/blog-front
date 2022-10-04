@@ -1,8 +1,12 @@
-// components
-import Image from "next/image";
 import { useState } from "react";
+import Image from "next/image";
+
+// components
 import Post from "../post/Post";
 import LoadButton from "../ui/button/LoadButton";
+
+// api
+import { API_URL } from "../api";
 
 const LSidebar = ({ posts }) => {
   const [limit, setLimit] = useState(5);
@@ -17,8 +21,10 @@ const LSidebar = ({ posts }) => {
         <h3 className="section-title">Последние посты</h3>
         <div className="w-auto-40">
           <Image
-            src="http://backend.1026361-ca72388.tmweb.ru/api/image/wave.svg"
-            layout="fill"
+            src={`${API_URL}image/wave.svg`}
+            width={40}
+            height={15}
+            layout="responsive"
             className="wave"
             alt="wave"
           />
