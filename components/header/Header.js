@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,35 +10,8 @@ import { API_URL } from "../api";
 const Header = () => {
   const router = useRouter();
   const [activeBtn, setActiveBtn] = useState(router.query.id);
+  const { category } = useSelector((state) => state.category);
   const [menuVisible, setmenuVisible] = useState(false);
-
-  const hedaerData = [
-    {
-      id: 1,
-      href: "/category/1",
-      text: "Разработка",
-    },
-    {
-      id: 2,
-      href: "/category/2",
-      text: "Дизайн",
-    },
-    {
-      id: 3,
-      href: "/category/3",
-      text: "Маркетинг",
-    },
-    {
-      id: 4,
-      href: "/category/4",
-      text: "Игри",
-    },
-    {
-      id: 5,
-      href: "/category/5",
-      text: "Кино",
-    },
-  ];
 
   useMemo(() => {
     setActiveBtn(router.query.id);
@@ -67,7 +41,7 @@ const Header = () => {
 
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
-                {hedaerData?.map((item) => {
+                {category?.items?.map((item) => {
                   return (
                     <li
                       className={
@@ -76,8 +50,8 @@ const Header = () => {
                       onClick={() => setActiveBtn(item.id)}
                       key={item.id}
                     >
-                      <Link href={item.href}>
-                        <a className="nav-link">{item.text}</a>
+                      <Link href={`/category/${item.id}`}>
+                        <a className="nav-link">{item.title}</a>
                       </Link>
                     </li>
                   );
@@ -152,15 +126,15 @@ const Header = () => {
 	<!-- menu --> */}
         <nav>
           <ul className="vertical-menu">
-            {hedaerData?.map((item) => {
+            {category?.items?.map((item) => {
               return (
                 <li
                   className={activeBtn === item.id ? "active" : ""}
                   onClick={() => setActiveBtn(item.id)}
                   key={item.id}
                 >
-                  <Link href={item.href}>
-                    <a className="nav-link">{item.text}</a>
+                  <Link href={`/category/${item.id}`}>
+                    <a className="nav-link">{item.title}</a>
                   </Link>
                 </li>
               );

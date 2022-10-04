@@ -4,7 +4,7 @@ import Link from "next/link";
 const AdsBanner = () => {
   return (
     <div className="ads-horizontal text-md-center">
-      <span className="ads-title">- Sponsored Ad -</span>
+      {/* <span className="ads-title">- Sponsored Ad -</span> */}
       <Link href="/">
         <a>
           {/* <Image
