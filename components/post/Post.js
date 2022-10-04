@@ -25,7 +25,11 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
   const { users } = useSelector((state) => state.users);
 
   const getAuthor = () => {
-    return users.items.filter((elm) => elm.id === author);
+    const username = users.items.filter((elm) => elm.id === author);
+    if (username.length > 0) {
+      return username[0].name;
+    }
+    return "Repost";
   };
 
   useEffect(() => {
@@ -72,9 +76,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
                 height={40}
                 layout="intrinsic"
               />
-              <div style={{ marginLeft: "12px" }}>
-                {getAuthor() && "Repost"}
-              </div>
+              <div style={{ marginLeft: "12px" }}>{getAuthor()}</div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">
