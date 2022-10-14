@@ -10,7 +10,11 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ["backend.1026361-ca72388.tmweb.ru"],
+    domains: [
+      "api.ofolio.ru",
+      "backend.1026361-ca72388.tmweb.ru",
+      "joeschmoe.io",
+    ],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],

@@ -1,50 +1,17 @@
 import React, { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 
+// api
+import { API_URL } from "../api";
+
 const Header = () => {
   const router = useRouter();
   const [activeBtn, setActiveBtn] = useState(router.query.id);
+  const { category } = useSelector((state) => state.category);
   const [menuVisible, setmenuVisible] = useState(false);
-
-  const hedaerData = [
-    {
-      id: 1,
-      href: "/category/1",
-      text: "Разработка",
-    },
-    {
-      id: 2,
-      href: "/category/2",
-      text: "Дизайн",
-    },
-    {
-      id: 3,
-      href: "/category/3",
-      text: "Маркетинг",
-    },
-    {
-      id: 4,
-      href: "/category/4",
-      text: "Игри",
-    },
-    {
-      id: 5,
-      href: "/category/5",
-      text: "Кино",
-    },
-    {
-      id: 6,
-      href: "/auth/login",
-      text: "Login",
-    },
-    {
-      id: 7,
-      href: "/auth/register",
-      text: "Register",
-    },
-  ];
 
   useMemo(() => {
     setActiveBtn(router.query.id);
@@ -58,7 +25,7 @@ const Header = () => {
             <Link href="/">
               <a className="navbar-brand w40">
                 <Image
-                  src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                  src={`${API_URL}image/1.jpg`}
                   style={{
                     width: "40px",
                     height: "40px",
@@ -66,7 +33,7 @@ const Header = () => {
                   }}
                   width={50}
                   height={50}
-                  layout="fill"
+                  layout="responsive"
                   alt="logo"
                 />
               </a>
@@ -74,7 +41,7 @@ const Header = () => {
 
             <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
-                {hedaerData?.map((item) => {
+                {category?.items?.map((item) => {
                   return (
                     <li
                       className={
@@ -83,12 +50,22 @@ const Header = () => {
                       onClick={() => setActiveBtn(item.id)}
                       key={item.id}
                     >
-                      <Link href={item.href}>
-                        <a className="nav-link">{item.text}</a>
+                      <Link href={`/category/${item.id}`}>
+                        <a className="nav-link">{item.title}</a>
                       </Link>
                     </li>
                   );
                 })}
+                <li className="nav-item">
+                  <Link href="/auth/login">
+                    <a className="nav-link">Login</a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/auth/register">
+                    <a className="nav-link">Register</a>
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -144,11 +121,11 @@ const Header = () => {
           <Link href="/">
             <a className="navbar-brand w40">
               <Image
-                src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
+                src={`${API_URL}image/1.jpg`}
                 style={{ borderRadius: "50%" }}
                 width={40}
                 height={40}
-                layout="fill"
+                layout="responsive"
                 alt="logo"
               />
             </a>
@@ -159,15 +136,15 @@ const Header = () => {
 	<!-- menu --> */}
         <nav>
           <ul className="vertical-menu">
-            {hedaerData?.map((item) => {
+            {category?.items?.map((item) => {
               return (
                 <li
                   className={activeBtn === item.id ? "active" : ""}
                   onClick={() => setActiveBtn(item.id)}
                   key={item.id}
                 >
-                  <Link href={item.href}>
-                    <a className="nav-link">{item.text}</a>
+                  <Link href={`/category/${item.id}`}>
+                    <a className="nav-link">{item.title}</a>
                   </Link>
                 </li>
               );

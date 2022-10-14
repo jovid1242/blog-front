@@ -3,7 +3,7 @@ import Pagination from "react-js-pagination";
 
 const index = ({ activePage, totalItemsCount }) => {
   const handlePageChange = (pageNumber) => {
-    console.log(`active page is ${pageNumber}`);
+    // console.log(`active page is ${pageNumber}`);
   };
 
   return (

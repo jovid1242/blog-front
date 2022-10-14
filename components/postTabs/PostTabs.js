@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
+// utils
 import { short } from "../../utils/short";
+
+// moment
 import * as moment from "moment";
 import "moment/locale/ru";
-import Image from "next/image";
+
+// api
+import { API_URL } from "../api";
+
 moment.locale("ru");
 
 const PopularPosts = ({ data }) => {
@@ -50,18 +58,13 @@ const PopularPosts = ({ data }) => {
           {data[activeTab][activeTab]?.items?.map((elm) => {
             return (
               <div className="post post-list-sm circle" key={elm.id}>
-                <div className="thumb circle">
+                <div className="thumb">
                   <Link href={`/post/${elm.id}`}>
                     <a>
                       <div className="inner">
                         <Image
-                          src={elm?.imageUrl}
-                          style={{
-                            width: 50,
-                            height: 50,
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                          }}
+                          src={`${API_URL}image/${elm?.imageUrl}`}
+                          className="w100"
                           width={50}
                           height={50}
                           priority

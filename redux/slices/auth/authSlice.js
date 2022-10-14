@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { setCookie, getCookies, deleteCookie } from "cookies-next";
 import http from "../../../components/http";
 
 export const fetchLogin = createAsyncThunk("auth/login", async (user) => {
@@ -12,10 +11,15 @@ export const fetchRegister = createAsyncThunk("auth/register", async (user) => {
   return data;
 });
 
+export const getToken = () => window.localStorage.getItem("token");
+export const setToken = (token) =>
+  window.localStorage.setItem("token", JSON.stringify(token));
+export const removeToken = () => window.localStorage.removeItem("token");
+
 const initialState = {
   isAuth: false,
   user: {},
-  token: getCookies("token"),
+  token: "",
   status: false,
   isError: false,
 };
@@ -27,7 +31,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.user = {};
       state.isAuth = false;
-      deleteCookie("token");
+      removeToken();
     },
   },
   extraReducers: {
@@ -40,7 +44,7 @@ export const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
-      setCookie("token", action.payload.accessToken, { maxAge: 60 * 6 * 24 });
+      setToken(action.payload.accessToken);
       state.status = false;
     },
     [fetchLogin.rejected]: (state, action) => {
@@ -59,7 +63,7 @@ export const authSlice = createSlice({
       state.isAuth = true;
       state.user = action.payload.user;
       state.token = action.payload.accessToken;
-      setCookie("token", action.payload.accessToken, { maxAge: 60 * 6 * 24 });
+      setToken(action.payload.accessToken);
       state.status = false;
     },
     [fetchRegister.rejected]: (state, action) => {

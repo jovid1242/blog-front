@@ -35,18 +35,25 @@ a {
 }
 
 .w40 {
-  width: 40px;
-  height: 40px;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
 }
 .w40 span {
   width: 40px !important;
   height: 40px !important;
   position: relative !important;
 }
-
-.w40 img {
+.w40 div {
   width: 40px !important;
   height: 40px !important;
+  position: relative !important;
+}
+
+.w40 div img {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
   object-fit: cover !important;
 }
 
@@ -74,6 +81,7 @@ a {
 .w100 {
   width: 100%;
   height: 250px;
+  border-radius: 15px !important;
 }
 
 .w100 img {

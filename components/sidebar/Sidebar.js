@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategory } from "../../redux/slices/category";
+
+// components
 import AdsBannerSidebar from "../adsBanner/AdsBannerSidebar";
 import Theme from "../theme/Theme";
 

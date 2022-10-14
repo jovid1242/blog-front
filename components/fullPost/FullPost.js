@@ -5,7 +5,14 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthors } from "../../redux/slices/users";
 
+// utils
+import getAuthor from "../../utils/author";
+
+// parser html
 import ReactHtmlParser from "react-html-parser";
+
+// api
+import { API_URL } from "../api";
 
 import * as moment from "moment";
 import "moment/locale/ru";
@@ -19,10 +26,6 @@ const FullPost = ({ post }) => {
   const parseText = () => {
     var textPostToHtml = ReactHtmlParser(post.text);
     setTextPost(textPostToHtml);
-  };
-
-  const getAuthor = () => {
-    return users.items.filter((elm) => elm.id === post.user_id);
   };
 
   useEffect(() => {
@@ -42,15 +45,15 @@ const FullPost = ({ post }) => {
             <ul className="meta list-inline mb-0 d-flex align-items-center">
               <li className="list-inline-item d-flex align-items-center">
                 <Image
-                  src="http://backend.1026361-ca72388.tmweb.ru/api/image/1.jpg"
-                  className="author mr-2"
+                  src={`${API_URL}image/1.jpg`}
+                  className="w40 mr-2"
                   alt="author"
                   style={{ borderRadius: "50%" }}
                   width={40}
                   height={40}
                 />
                 <div style={{ marginLeft: "12px" }}>
-                  {getAuthor() && "Repost"}
+                  {getAuthor(users.items, post.user_id)}
                 </div>
               </li>
               <li className="list-inline-item">
@@ -61,7 +64,7 @@ const FullPost = ({ post }) => {
         </div>
         <div className="featured-image">
           <Image
-            src={post?.imageUrl}
+            src={`${API_URL}image/${post.imageUrl}`}
             width={1000}
             height={500}
             className="imgCover"
