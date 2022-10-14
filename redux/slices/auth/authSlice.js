@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "../../../components/http";
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
 export const fetchLogin = createAsyncThunk("auth/login", async (user) => {
   const { data } = await http.post("login", user);
@@ -11,10 +12,12 @@ export const fetchRegister = createAsyncThunk("auth/register", async (user) => {
   return data;
 });
 
-export const getToken = () => window.localStorage.getItem("token");
-export const setToken = (token) =>
-  window.localStorage.setItem("token", JSON.stringify(token));
-export const removeToken = () => window.localStorage.removeItem("token");
+export const getToken = () => getCookie("token");
+export const setToken = (token) => setCookie("token", token);
+export const removeToken = () => {
+  deleteCookie("token");
+  deleteCookie("user");
+};
 
 const initialState = {
   isAuth: false,

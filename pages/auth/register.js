@@ -8,7 +8,7 @@ import { Button, Form, Input } from "antd";
 // import { UserOutlined } from "@ant-design/icons";
 
 // slice
-import { fetchAuth } from "../../redux/slices/auth/authSlice";
+import { fetchRegister } from "../../redux/slices/auth/authSlice";
 
 // components
 import Header from "../../components/header/Header";
@@ -30,7 +30,7 @@ const Register = () => {
   };
 
   const onFinish = (values) => {
-    dispatch(fetchAuth(values));
+    dispatch(fetchRegister(values));
     route.push("/profile");
   };
 
@@ -57,7 +57,7 @@ const Register = () => {
             autoComplete="off"
           >
             <Form.Item
-              name="username"
+              name="name"
               rules={[
                 {
                   required: true,

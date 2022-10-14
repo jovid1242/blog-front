@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,9 +13,11 @@ const Header = () => {
   const [activeBtn, setActiveBtn] = useState(router.query.id);
   const { category } = useSelector((state) => state.category);
   const [menuVisible, setmenuVisible] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
 
   useMemo(() => {
     setActiveBtn(router.query.id);
+    setIsAuth(getCookie("user"));
   }, []);
 
   return (
@@ -56,16 +59,26 @@ const Header = () => {
                     </li>
                   );
                 })}
-                <li className="nav-item">
-                  <Link href="/auth/login">
-                    <a className="nav-link">Login</a>
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/auth/register">
-                    <a className="nav-link">Register</a>
-                  </Link>
-                </li>
+                {isAuth === false ? (
+                  <>
+                    <li className="nav-item">
+                      <Link href="/auth/login">
+                        <a className="nav-link">Login</a>
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link href="/auth/register">
+                        <a className="nav-link">Register</a>
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li className="nav-item">
+                    <Link href="/profile">
+                      <a className="nav-link">Профиль</a>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -149,6 +162,26 @@ const Header = () => {
                 </li>
               );
             })}
+            {isAuth === false ? (
+              <>
+                <li className="nav-item">
+                  <Link href="/auth/login">
+                    <a className="nav-link">Login</a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/auth/register">
+                    <a className="nav-link">Register</a>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <Link href="/profile">
+                  <a className="nav-link">Профиль</a>
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
 

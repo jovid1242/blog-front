@@ -1,0 +1,12 @@
+.loadingContainer {
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: whitesmoke;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
