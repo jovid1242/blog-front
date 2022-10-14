@@ -1,15 +1,16 @@
 import Head from "next/head";
-import FullPost from "../../components/fullPost/FullPost";
-import Sidebar from "../../components/sidebar/Sidebar";
+import FullPost from "../../../components/fullPost/FullPost";
+import Sidebar from "../../../components/sidebar/Sidebar";
 
-import http from "../../components/http";
+import http from "../../../components/http";
 
 // components
-import Header from "../../components/header/Header";
+import Header from "../../../components/header/Header";
 
 // styles
-import styles from "../../styles/Home.module.css";
-import Footer from "../../components/footer/Footer";
+import styles from "../../../styles/Home.module.css";
+import Footer from "../../../components/footer/Footer";
+import { translitRuEnLowercase } from "../../../utils/translateUrl";
 
 const Index = ({ post }) => {
   return (
@@ -47,9 +48,12 @@ const Index = ({ post }) => {
 export async function getServerSideProps({ params }) {
   let post = {};
   let viewPost = {};
-  await http.get(`/posts/${params.id}`).then((res) => {
-    post = res.data.post;
-  });
+
+  await http
+    .get(`/posts/${translitRuEnLowercase(params.title)}/${params.id}`)
+    .then((res) => {
+      post = res.data.post;
+    });
 
   await http.post(`post-view/${post.id}`).then(({ data }) => {
     viewPost = data;

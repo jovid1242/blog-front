@@ -4,6 +4,7 @@ import Image from "next/image";
 
 // utils
 import { short } from "../../utils/short";
+import { translitRuEnLowercase } from "../../utils/translateUrl";
 
 // moment
 import * as moment from "moment";
@@ -59,7 +60,9 @@ const PopularPosts = ({ data }) => {
             return (
               <div className="post post-list-sm circle" key={elm.id}>
                 <div className="thumb">
-                  <Link href={`/post/${elm.id}`}>
+                  <Link
+                    href={`/post/${translitRuEnLowercase(elm.title)}/${elm.id}`}
+                  >
                     <a>
                       <div className="inner">
                         <Image
@@ -76,7 +79,11 @@ const PopularPosts = ({ data }) => {
                 </div>
                 <div className="details clearfix">
                   <h6 className="post-title my-0">
-                    <Link href={`/post/${elm.id}`}>
+                    <Link
+                      href={`/post/${translitRuEnLowercase(elm.title)}/${
+                        elm.id
+                      }`}
+                    >
                       <a>{short.shortText(elm.title, 30)}</a>
                     </Link>
                   </h6>

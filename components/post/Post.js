@@ -12,6 +12,7 @@ import ReactHtmlParser from "react-html-parser";
 import imageLoader from "../../utils/imageLoader";
 import { short } from "../../utils/short";
 import getAuthor from "../../utils/author";
+import { translitRuEnLowercase } from "../../utils/translateUrl";
 
 // api
 import { API_URL } from "../api";
@@ -37,7 +38,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
           <span className="post-format-sm">
             <i className="icon-picture"></i>
           </span>
-          <Link href={`/post/${id}`}>
+          <Link href={`/post/${translitRuEnLowercase(title)}/${id}`}>
             <a className="inner w100">
               <Image
                 src={`${API_URL}image/${imageUrl}`}
@@ -84,7 +85,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
             <li className="list-inline-item">{moment(date).format("LL")}</li>
           </ul>
           <h5 className="post-title">
-            <Link href={`/post/${id}`}>
+            <Link href={`/post/${translitRuEnLowercase(title)}/${id}`}>
               <a>{short.shortText(title, 50)}</a>
             </Link>
           </h5>

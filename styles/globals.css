@@ -89,3 +89,23 @@ a {
   height: 250px !important;
   object-fit: cover !important;
 }
+
+.affix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  box-shadow: 0 2px 12px #00000041;
+  z-index: 98;
+}
+
+@media only screen and (max-width: 767px) {
+  .w100 img {
+    width: 100% !important;
+    height: 340px !important;
+    object-fit: cover !important;
+  }
+}

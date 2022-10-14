@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
@@ -14,16 +14,38 @@ const Header = () => {
   const { category } = useSelector((state) => state.category);
   const [menuVisible, setmenuVisible] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [head, setHead] = useState(false);
 
   useMemo(() => {
     setActiveBtn(router.query.id);
     setIsAuth(getCookie("user"));
   }, []);
 
+  const closeMenu = (id) => {
+    if (id) {
+      setActiveBtn(id);
+    }
+    setmenuVisible(false);
+  };
+
+  useEffect(() => {
+    window.onscroll = function (e) {
+      if (window.scrollY > 0) {
+        setHead(true);
+      } else {
+        setHead(false);
+      }
+    };
+  }, []);
+
   return (
     <>
       <header className="header-default">
-        <nav className="navbar navbar-expand-lg">
+        <nav
+          className={
+            head ? "navbar navbar-expand-lg affix" : "navbar navbar-expand-lg"
+          }
+        >
           <div className="container-xl">
             <Link href="/">
               <a className="navbar-brand w40">
@@ -50,7 +72,7 @@ const Header = () => {
                       className={
                         activeBtn === item.id ? "nav-item active" : "nav-item"
                       }
-                      onClick={() => setActiveBtn(item.id)}
+                      onClick={() => closeMenu(item.id)}
                       key={item.id}
                     >
                       <Link href={`/category/${item.id}`}>
@@ -61,19 +83,19 @@ const Header = () => {
                 })}
                 {isAuth === false ? (
                   <>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={() => closeMenu()}>
                       <Link href="/auth/login">
                         <a className="nav-link">Login</a>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={() => closeMenu()}>
                       <Link href="/auth/register">
                         <a className="nav-link">Register</a>
                       </Link>
                     </li>
                   </>
                 ) : (
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={() => closeMenu()}>
                     <Link href="/profile">
                       <a className="nav-link">Профиль</a>
                     </Link>
@@ -124,7 +146,7 @@ const Header = () => {
       >
         <button
           type="button"
-          onClick={() => setmenuVisible(false)}
+          onClick={() => closeMenu()}
           className="btn-close"
           aria-label="Close"
         ></button>
@@ -153,7 +175,7 @@ const Header = () => {
               return (
                 <li
                   className={activeBtn === item.id ? "active" : ""}
-                  onClick={() => setActiveBtn(item.id)}
+                  onClick={() => closeMenu(item.id)}
                   key={item.id}
                 >
                   <Link href={`/category/${item.id}`}>

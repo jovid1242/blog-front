@@ -2,7 +2,8 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 
 const instance = axios.create({
-  baseURL: "http://api.ofolio.ru/api/",
+  // baseURL: "http://api.ofolio.ru/api/",
+  baseURL: "http://localhost:9001/api/",
 });
 
 instance.interceptors.request.use(
@@ -46,7 +47,7 @@ export default instance;
 //     "Content-Type": "application/json",
 //     Accept: "application/json",
 //   },
-//   baseURL: "http://localhost:9001/api/",
+//
 // });
 // http: http.interceptors.response.use(
 //   function (response) {
