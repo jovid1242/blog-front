@@ -60,9 +60,13 @@ const PopularPosts = ({ data }) => {
             return (
               <div className="post post-list-sm circle" key={elm.id}>
                 <div className="thumb">
+<<<<<<< HEAD
                   <Link
                     href={`/post/${translitRuEnLowercase(elm.title)}/${elm.id}`}
                   >
+=======
+                  <Link href={`/post/${elm.id}`}>
+>>>>>>> 327537de8f01e52938cc0ac0b644b4a88966d795
                     <a>
                       <div className="inner">
                         <Image
