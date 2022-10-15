@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 // icons
@@ -7,7 +6,7 @@ import { RollbackOutlined } from "@ant-design/icons";
 // styles
 import styles from "../../styles/profile.module.scss";
 
-const profileHeader = () => {
+const ProfileHeader = () => {
   return (
     <div className={styles.profile_header}>
       <Link href="/">
@@ -22,4 +21,4 @@ const profileHeader = () => {
   );
 };
 
-export default profileHeader;
+export default ProfileHeader;

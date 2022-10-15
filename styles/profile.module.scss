@@ -21,11 +21,40 @@
 .user_avatar {
   margin-right: 20px;
 }
-.user_edit_btn button {
+.user_edit_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  button {
+    padding: 8px 16px;
+    background: linear-gradient(to top, #ffa387 0%, #fe4f70 51%, #ffa387 100%);
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+  }
+}
+.title {
+  color: #203656;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.post_title {
+  color: #203656;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.btn_remove {
   padding: 8px 16px;
-  background: linear-gradient(to top, #ffa387 0%, #fe4f70 51%, #ffa387 100%);
-  box-shadow: 0 2px 12px #ea4c89;
+  background: #fe4f70;
+  background: linear-gradient(to right, #fe4f70 0%, #ffa387 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
+  cursor: pointer;
   border-radius: 8px;
   outline: none;
   border: none;
