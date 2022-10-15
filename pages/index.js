@@ -3,14 +3,18 @@ import Head from "next/head";
 // store
 import { wrapper } from "../redux/store";
 import { fetchPosts } from "../redux/slices/posts";
+import { useSelector } from "react-redux";
 
 // components
 import Header from "../components/header/Header";
 import Main from "../components/main/Main";
 import Hero from "../components/section/Hero";
 import Footer from "../components/footer/Footer";
+import Loading from "../components/loader";
+import Instagran from "../components/instagram";
 
 const Home = (props) => {
+  const { popularPosts } = useSelector((state) => state.popularPosts);
   return (
     <div>
       <Head>
@@ -28,10 +32,13 @@ const Home = (props) => {
         />
       </Head>
       <div className="site-wrapper">
+        <Loading loading={popularPosts.status === "loading" ? true : false} />
         <div className="main-overlay"></div>
         <Header store={props} />
         <Hero />
         <Main store={props} />
+        <div className="spacer" data-height="50"></div>
+        <Instagran />
         <Footer />
       </div>
     </div>

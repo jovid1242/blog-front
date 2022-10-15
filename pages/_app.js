@@ -1,6 +1,9 @@
 import "../styles/globals.css";
+import "antd/dist/antd.css";
+import "react-toastify/dist/ReactToastify.css";
 import { wrapper } from "../redux/store";
 import Script from "next/script";
+import { ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -20,6 +23,17 @@ function MyApp({ Component, pageProps }) {
             });
           `}
       </Script>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Component {...pageProps} />
     </>
   );

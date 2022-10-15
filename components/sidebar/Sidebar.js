@@ -5,6 +5,7 @@ import { fetchCategory } from "../../redux/slices/category";
 // components
 import AdsBannerSidebar from "../adsBanner/AdsBannerSidebar";
 import Theme from "../theme/Theme";
+import Tags from "../tags/Tags";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Sidebar = () => {
       <div className="sidebar">
         <Theme category={category.category} />
         <AdsBannerSidebar />
+        <Tags />
         {/* <div className="widget rounded">
           <div className="widget-header text-center">
             <h3 className="widget-title">Tag Clouds</h3>

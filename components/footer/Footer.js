@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="row d-flex align-items-center gy-4">
             <div className="col-md-4">
               <span className="copyright">
-                © {new Date().getFullYear()} Repost
+                © {new Date().getFullYear()} Repost | Jovidon
               </span>
             </div>
 

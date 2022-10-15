@@ -11,6 +11,7 @@ import Image from "next/image";
 // utils
 import { short } from "../../utils/short";
 import getAuthor from "../../utils/author";
+import { translitRuEnLowercase } from "../../utils/translateUrl";
 
 // api
 import { API_URL } from "../api";
@@ -58,7 +59,7 @@ const PostCategory = ({ post }) => {
           <span className="post-format">
             <i className="icon-picture"></i>
           </span>
-          <Link href={`/post/${post.id}`}>
+          <Link href={`/post/${translitRuEnLowercase(post.title)}/${post.id}`}>
             <a>
               <div className="inner">
                 <Image
@@ -104,7 +105,9 @@ const PostCategory = ({ post }) => {
             </li>
           </ul>
           <h5 className="post-title">
-            <Link href={`/post/${post.id}`}>
+            <Link
+              href={`/post/${translitRuEnLowercase(post.title)}/${post.id}`}
+            >
               <a>{short.shortText(post.title, 50)}</a>
             </Link>
           </h5>
