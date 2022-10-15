@@ -9,7 +9,6 @@ import * as moment from "moment";
 import ReactHtmlParser from "react-html-parser";
 
 // utils
-import imageLoader from "../../utils/imageLoader";
 import { short } from "../../utils/short";
 import getAuthor from "../../utils/author";
 import { translitRuEnLowercase } from "../../utils/translateUrl";
@@ -42,7 +41,6 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
             <a className="inner w100">
               <Image
                 src={`${API_URL}image/${imageUrl}`}
-                loader={imageLoader}
                 style={{
                   width: "100%",
                   height: 200,
