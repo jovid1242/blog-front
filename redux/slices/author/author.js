@@ -25,10 +25,13 @@ export const authorSlice = createSlice({
       state.authorPosts.isLoad = action.payload;
     },
     removePost: (state, action) => {
-      console.log("action.payload", action.payload);
       state.authorPosts.items = state.authorPosts.items.filter(
         (elm) => elm.id !== action.payload
       );
+    },
+    addPost: (state, action) => {
+      state.authorPosts.items = [...state.authorPosts.items, action.payload];
+      state.authorPosts.isLoad = false;
     },
   },
   extraReducers: {
@@ -50,6 +53,6 @@ export const authorSlice = createSlice({
   },
 });
 
-export const { setLoad, removePost } = authorSlice.actions;
+export const { setLoad, removePost, addPost } = authorSlice.actions;
 
 export default authorSlice.reducer;
