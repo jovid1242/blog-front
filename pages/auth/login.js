@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import Link from "next/link";
 
 // antd
@@ -31,7 +32,11 @@ const Login = () => {
 
   const onFinish = (values) => {
     dispatch(fetchLogin(values));
-    route.push("/profile");
+    if (auth.isError !== false) {
+      toast.error(auth.isError);
+    } else if (Object.keys(auth.user).length !== 0) {
+      route.push("/profile");
+    }
   };
 
   return (
@@ -40,11 +45,11 @@ const Login = () => {
       <div className={style.form}>
         <div className="form_head">
           <h2>Авторизация</h2>
-          {auth.isError && (
+          {/* {auth.isError && (
             <div>
               <p type="danger">{auth.isError}</p>
             </div>
-          )}
+          )} */}
         </div>
         <div className={style.form_wrapper}>
           <Form
@@ -86,7 +91,7 @@ const Login = () => {
           </Form>
         </div>
         <div className="form_footer">
-          Нету аккаунта ?{" "}
+          Нет аккаунта?{" "}
           <Link href="/auth/register">
             <a>Регистрация</a>
           </Link>

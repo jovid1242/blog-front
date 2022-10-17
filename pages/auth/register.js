@@ -1,6 +1,6 @@
-import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 import Link from "next/link";
 
 // antd
@@ -31,7 +31,11 @@ const Register = () => {
 
   const onFinish = (values) => {
     dispatch(fetchRegister(values));
-    route.push("/profile");
+    if (auth.isError !== false) {
+      toast.error(auth.isError);
+    } else if (Object.keys(auth.user).length !== 0) {
+      route.push("/profile");
+    }
   };
 
   return (

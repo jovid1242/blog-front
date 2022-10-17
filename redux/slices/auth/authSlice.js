@@ -54,8 +54,12 @@ export const authSlice = createSlice({
       state.status = false;
     },
     [fetchLogin.rejected]: (state, action) => {
+      if (action.error) {
+        state.isError = "Неправильный адрес электронной почты или пароль!";
+      } else {
+        state.isError = "Произошла ошибка при входе в систему";
+      }
       state.isAuth = false;
-      state.isError = "action.payload";
       state.user = {};
       state.status = false;
     },
@@ -73,8 +77,10 @@ export const authSlice = createSlice({
       state.status = false;
     },
     [fetchRegister.rejected]: (state, action) => {
+      if (action.error && action.error.code) {
+        state.isError = "Произошла ошибка при входе в систему";
+      }
       state.isAuth = false;
-      state.isError = "action.payload";
       state.user = {};
       state.status = false;
     },

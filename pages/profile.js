@@ -43,11 +43,11 @@ export default function Profile() {
       <Loading loading={authorPosts.isLoad} />
       <div className="container-xl">
         <ProfileHeader />
-        <div className="row gy-4 mt-4">
-          <div className="col-lg-4">
+        <div className="row mt-4">
+          <div className="col-lg-12">
             <UserInfo />
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-12">
             <UserPosts />
           </div>
         </div>

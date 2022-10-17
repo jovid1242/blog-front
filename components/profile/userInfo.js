@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import FormData from "form-data";
 
@@ -13,12 +13,14 @@ import { fetchCategory } from "../../redux/slices/category";
 
 // styles
 import styles from "../../styles/profile.module.scss";
+import Tiptap from "../editor/TipTapEditor";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { category } = useSelector((state) => state.category);
   const { user } = useSelector((state) => state.auth);
+  const [htmlContent, setHtmlContent] = useState("");
 
   const validateMessages = {
     required: "Пожалуйста, заполните поля ${label} ",
@@ -28,10 +30,17 @@ const UserInfo = () => {
     form.resetFields();
   };
 
+  const hanldeChange = (html) => {
+    setHtmlContent(html);
+  };
+
   const onFinish = (values) => {
+    if (htmlContent === "Начни писать сюда!!!") {
+      toast.error("Добавьте описание поста");
+    }
     const data = new FormData();
     data.append("title", values.title);
-    data.append("text", values.text);
+    data.append("text", htmlContent);
     data.append("image", values.image.target.files[0]);
     data.append("category", values.category);
     data.append("user_id", user.id);
@@ -83,9 +92,8 @@ const UserInfo = () => {
               })}
             </Select>
           </Form.Item>
-
-          <Form.Item name="text" rules={[{ required: true }]}>
-            <Input.TextArea placeholder="Описание" rows={4} />
+          <Form.Item name="text">
+            <Tiptap hanldeChange={hanldeChange} />
           </Form.Item>
 
           <Form.Item
