@@ -69,7 +69,9 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
                 layout="intrinsic"
               />
               <div style={{ marginLeft: "12px" }}>
-                {getAuthor(users.items, author)}
+                <Link href={`/author/${author}`}>
+                  <a>{getAuthor(users.items, author)}</a>
+                </Link>
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">

@@ -53,7 +53,9 @@ const FullPost = ({ post }) => {
                   height={40}
                 />
                 <div style={{ marginLeft: "12px" }}>
-                  {getAuthor(users.items, post.user_id)}
+                  <Link href={`/author/${post.user_id}`}>
+                    {getAuthor(users.items, post.user_id)}
+                  </Link>
                 </div>
               </li>
               <li className="list-inline-item">

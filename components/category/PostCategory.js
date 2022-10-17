@@ -88,8 +88,11 @@ const PostCategory = ({ post }) => {
                 width={40}
                 height={40}
               />
+
               <div style={{ marginLeft: "12px" }}>
-                {getAuthor(users.items, post.user_id)}
+                <Link href={`/author/${post.user_id}`}>
+                  <a>{getAuthor(users.items, post.user_id)}</a>
+                </Link>
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
