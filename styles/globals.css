@@ -12,6 +12,13 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+ul {
+  margin: 0;
+}
+ul li {
+  list-style: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

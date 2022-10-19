@@ -23,6 +23,7 @@ const validationErrorHandler = (res) => {
 
 const instance = axios.create({
   baseURL: "http://api.ofolio.ru/api/",
+  // baseURL: "http://localhost:9001/api/",
 });
 
 instance.interceptors.request.use(

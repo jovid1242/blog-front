@@ -12,8 +12,13 @@ import { addPost, setLoad } from "../../redux/slices/author/author";
 import { fetchCategory } from "../../redux/slices/category";
 
 // styles
+
+import dynamic from "next/dynamic";
+const Jjeditor = dynamic(() => import("../editor/JoditEditor"), {
+  ssr: false,
+});
 import styles from "../../styles/profile.module.scss";
-import Tiptap from "../editor/TipTapEditor";
+// import Jjeditor from "";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -93,7 +98,8 @@ const UserInfo = () => {
             </Select>
           </Form.Item>
           <Form.Item name="text">
-            <Tiptap hanldeChange={hanldeChange} />
+            {/* <Tiptap hanldeChange={hanldeChange} /> */}
+            <Jjeditor hanldeChange={hanldeChange} />
           </Form.Item>
 
           <Form.Item
