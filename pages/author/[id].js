@@ -11,7 +11,7 @@ import Footer from "../../components/footer/Footer";
 import AuthorBanner from "../../components/author/authorBanner";
 
 const Index = (props) => {
-  console.log("props.user", props.user);
+  // console.log("props.user", props.user);
   return (
     <div>
       <Head>

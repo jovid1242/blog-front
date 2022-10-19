@@ -52,12 +52,12 @@ const userPosts = () => {
 
   useEffect(() => {
     checkAuthorPosts();
-    console.log("posts", posts[0]);
+    // console.log("posts", posts[0]);
   }, [authorPosts]);
 
   return (
     <>
-      <h3 className={styles.title}>Мои пости</h3>
+      <h3 className={styles.title}>Мои посты</h3>
       <div className={styles.posts}>
         {posts?.length > 0 ? (
           posts?.map((elm) => {

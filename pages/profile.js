@@ -29,7 +29,7 @@ export default function Profile() {
         setUser(res.data.user);
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
       });
   };
 

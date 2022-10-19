@@ -62,7 +62,7 @@ const CustomEditor = (props) => {
       const imageUrl = await CloudImage(form_data);
 
       if (imageUrl) {
-        console.log(imageUrl);
+        // console.log(imageUrl);
 
         return imageUrl;
       } else {

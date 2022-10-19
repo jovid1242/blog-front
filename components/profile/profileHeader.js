@@ -22,7 +22,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 const ProfileHeader = ({ user }) => {
-  console.log("user", user);
+  // console.log("user", user);
   const router = useRouter();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const ProfileHeader = ({ user }) => {
   };
 
   const onFinish = (values) => {
-    console.log("values", values);
+    // console.log("values", values);
     const data = new FormData();
     data.append("social", values.social);
     data.append("info", values.info);
