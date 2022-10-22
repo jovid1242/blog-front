@@ -20,8 +20,6 @@ import { API_URL } from "../api";
 import * as moment from "moment";
 import "moment/locale/ru";
 
-// icon
-import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
 
 const PostCategory = ({ post }) => {
@@ -98,7 +96,12 @@ const PostCategory = ({ post }) => {
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">
                 <a>
-                  <Image src={eyeIcon} alt="eye icon" width={10} height={10} />
+                  <Image
+                    src="/static/eye-solid.svg"
+                    alt="eye icon"
+                    width={10}
+                    height={10}
+                  />
                 </a>
               </Link>
               <div style={{ marginLeft: "6px" }}>{post.viewCount}</div>
