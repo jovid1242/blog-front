@@ -1405,7 +1405,7 @@ section {
   display: inline-block;
   background-color: #fe4f70;
   border-radius: 50%;
-  margin-left: 1rem;
+  margin-left: 10px;
   height: 3px;
   vertical-align: middle;
   position: relative;
@@ -1414,7 +1414,7 @@ section {
 }
 
 .post .meta li:not(:last-child) {
-  margin-right: 0.8rem;
+  margin-right: 0.4rem;
 }
 
 .post .meta li img.author {

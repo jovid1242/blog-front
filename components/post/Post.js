@@ -18,7 +18,6 @@ import { API_URL } from "../api";
 
 // moment
 import "moment/locale/ru";
-import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
 
 const Post = ({ title, text, id, date, imageUrl, author, view }) => {
@@ -26,7 +25,7 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
   const { users } = useSelector((state) => state.users);
 
   useEffect(() => {
-    const textPostToHtml = ReactHtmlParser(short.shortText(text, 350));
+    const textPostToHtml = ReactHtmlParser(short.shortText(text, 160));
     setTextPost(textPostToHtml);
   }, []);
 
@@ -77,7 +76,13 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">
                 <a>
-                  <Image src={eyeIcon} alt="eye icon" width={10} height={10} />
+                  <Image
+                    src="/static/view-eye-svgrepo-com.svg"
+                    alt="eye icon"
+                    className="svg-path"
+                    width={12}
+                    height={12}
+                  />
                 </a>
               </Link>
               <div style={{ marginLeft: "6px" }}>{view}</div>

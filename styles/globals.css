@@ -41,6 +41,17 @@ a {
   box-sizing: border-box;
 }
 
+.c-black {
+  color: #000 !important;
+  margin-left: 10px !important;
+}
+
+.dflex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .w40 {
   width: 40px !important;
   height: 40px !important;
@@ -133,14 +144,14 @@ code {
 
 pre {
   background: #0d0d0d;
-  color: #fff;
+  color: #558b2f;
   font-family: "JetBrainsMono", monospace;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 }
 pre code {
   color: inherit;
-  padding: 0;
+  padding: 1rem;
   background: none;
   font-size: 0.8rem;
 }
@@ -189,8 +200,8 @@ pre code {
 
 @media only screen and (max-width: 767px) {
   .w100 img {
-    width: 100% !important;
-    height: 340px !important;
+    width: 370px !important;
+    height: 200px !important;
     object-fit: cover !important;
   }
 }

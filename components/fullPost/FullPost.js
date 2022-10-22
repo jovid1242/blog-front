@@ -58,6 +58,10 @@ const FullPost = ({ post }) => {
                   </Link>
                 </div>
               </li>
+              <li className="list-inline-item dflex">
+                Просмотр
+                <div className="c-black ml-1">{post.viewCount}</div>
+              </li>
               <li className="list-inline-item">
                 {moment(post.createdAt).format("LL")}
               </li>
