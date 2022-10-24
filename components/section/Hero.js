@@ -14,6 +14,7 @@ import PostTabs from "../postTabs/PostTabs";
 
 // api
 import { API_URL } from "../api";
+import Slider from "../slider/Slider";
 
 const Hero = () => {
   const [banner, setBanner] = useState({});
@@ -39,7 +40,8 @@ const Hero = () => {
       <div className="container-xl">
         <div className="row gy-4">
           <div className="col-lg-8">
-            <div className="post featured-post-lg">
+            <Slider />
+            {/* <div className="post featured-post-lg">
               <div className="details clearfix">
                 <h2 className="post-title">
                   <Link href="/category/1">
@@ -68,7 +70,7 @@ const Hero = () => {
                   </div>
                 </a>
               </Link>
-            </div>
+            </div> */}
           </div>
 
           <div className="col-lg-4">

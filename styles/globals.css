@@ -198,6 +198,10 @@ pre code {
   margin-bottom: 12px;
 }
 
+.ant-carousel .slick-dots-bottom {
+  bottom: 65px !important;
+}
+
 @media only screen and (max-width: 767px) {
   .w100 img {
     width: 370px !important;

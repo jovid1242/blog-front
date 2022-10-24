@@ -1960,7 +1960,7 @@ section {
 .featured-post-lg .thumb .inner {
   background-size: cover;
   background-position: center center;
-  height: 533px;
+  height: 450px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -2146,11 +2146,11 @@ section {
   border-radius: 10px;
 }
 
-.post-carousel-lg .slick-dots {
+/* .post-carousel-lg .slick-dots {
   position: absolute;
   bottom: 30px;
   margin: 0;
-}
+} */
 
 .post-carousel-lg .slick-prev {
   left: 30px;
@@ -3274,7 +3274,7 @@ button:focus {
 .slick-dotted.slick-slider {
   margin-bottom: 0;
 }
-
+/* 
 .slick-dots {
   position: relative;
   bottom: 0;
@@ -3317,7 +3317,7 @@ button:focus {
   left: 8px;
   height: 8px;
   width: 8px;
-}
+} */
 
 .slick-arrows-top {
   position: absolute;
