@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthors } from "../../redux/slices/users";
 
 // utils
-import getAuthor from "../../utils/author";
+import { getAuthors } from "../../utils/author";
 
 // parser html
 import ReactHtmlParser from "react-html-parser";
@@ -22,6 +22,8 @@ const FullPost = ({ post }) => {
   const [textPost, setTextPost] = useState("");
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
+
+  const user = getAuthors.getAuthor(users.items, post.user_id);
 
   const parseText = () => {
     var textPostToHtml = ReactHtmlParser(post.text);
@@ -44,17 +46,35 @@ const FullPost = ({ post }) => {
           <div className="details">
             <ul className="meta list-inline mb-0 d-flex align-items-center">
               <li className="list-inline-item d-flex align-items-center">
-                <Image
-                  src={`${API_URL}image/1.jpg`}
-                  className="w40 mr-2"
-                  alt="author"
-                  style={{ borderRadius: "50%" }}
-                  width={40}
-                  height={40}
-                />
+                <Link href={`/author/${post.user_id}`}>
+                  <a>
+                    <Image
+                      src={
+                        user.imageUrl !== null
+                          ? `${API_URL}image/${user.imageUrl}`
+                          : `${API_URL}image/1.jpg`
+                      }
+                      className="w40 mr-2 avatar-img"
+                      alt="author"
+                      style={{
+                        borderRadius: "50%",
+                        boxShadow: "0 2px 15px red",
+                      }}
+                      width={40}
+                      height={40}
+                      layout="intrinsic"
+                    />
+                  </a>
+                </Link>
                 <div style={{ marginLeft: "12px" }}>
-                  {getAuthor(users.items, post.user_id)}
+                  <Link href={`/author/${post.user_id}`}>
+                    {getAuthors.getAuthorName(users.items, post.user_id)}
+                  </Link>
                 </div>
+              </li>
+              <li className="list-inline-item dflex">
+                Просмотр
+                <div className="c-black ml-1">{post.viewCount}</div>
               </li>
               <li className="list-inline-item">
                 {moment(post.createdAt).format("LL")}

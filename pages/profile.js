@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 
 import withPrivateRoute from "../components/withPrivateRoute";
 import { setUser } from "../redux/slices/auth/authSlice";
+import { toast } from "react-toastify";
 
 // components
 import Loading from "../components/loader";
@@ -16,22 +17,25 @@ import { fetchAuthorPosts } from "../redux/slices/author/author";
 
 export default function Profile() {
   const { authorPosts } = useSelector((state) => state.author);
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
+  const route = useRouter();
 
   const getUser = () => {
-    setLoading(true);
     dispatch(fetchAuthorPosts());
     http
       .get("/auth/me")
       .then((res) => {
         dispatch(setUser(res.data.user));
         setCookie("user", JSON.stringify(res.data.user));
+        setUser(res.data.user);
       })
       .catch((err) => {
-        console.log("err", err);
-      })
-      .finally(() => setLoading(false));
+        toast.error(err);
+        // if (err) {
+        //   route.push("/auth/login");
+        // }
+      });
   };
 
   useEffect(() => {
@@ -42,12 +46,12 @@ export default function Profile() {
     <>
       <Loading loading={authorPosts.isLoad} />
       <div className="container-xl">
-        <ProfileHeader />
-        <div className="row gy-4 mt-4">
-          <div className="col-lg-4">
+        <ProfileHeader user={user} />
+        <div className="row mt-4">
+          <div className="col-lg-12">
             <UserInfo />
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-12">
             <UserPosts />
           </div>
         </div>

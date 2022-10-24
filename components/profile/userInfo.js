@@ -1,30 +1,80 @@
-import { Button, Form, Input, Select, Upload, TextArea } from "antd";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import FormData from "form-data";
 
-// icons
-import { PlusOutlined } from "@ant-design/icons";
+// components
+import { Button, Form, Input, Select } from "antd";
+import { toast } from "react-toastify";
+import http from "../http";
+
+// // slices
+import { addPost, setLoad } from "../../redux/slices/author/author";
+import { fetchCategory } from "../../redux/slices/category";
 
 // styles
-import styles from "../../styles/profile.module.scss";
 
-const userInfo = () => {
+import dynamic from "next/dynamic";
+const Jjeditor = dynamic(() => import("../editor/JoditEditor"), {
+  ssr: false,
+});
+import styles from "../../styles/profile.module.scss";
+// import Jjeditor from "";
+
+const UserInfo = () => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const { category } = useSelector((state) => state.category);
+  const { user } = useSelector((state) => state.auth);
+  const [htmlContent, setHtmlContent] = useState("");
+
   const validateMessages = {
-    required: "Пожалуйста, введите ваше ${label} ",
-    types: {
-      email: "${label} не является действительной электронной почтой!",
-      number: "${label} is not a valid number!",
-    },
+    required: "Пожалуйста, заполните поля ${label} ",
+  };
+
+  const onReset = () => {
+    form.resetFields();
+  };
+
+  const hanldeChange = (html) => {
+    setHtmlContent(html);
   };
 
   const onFinish = (values) => {
-    dispatch(fetchLogin(values));
-    route.push("/profile");
+    if (htmlContent === "Начни писать сюда!!!") {
+      toast.error("Добавьте описание поста");
+    }
+    const data = new FormData();
+    data.append("title", values.title);
+    data.append("text", htmlContent);
+    data.append("image", values.image.target.files[0]);
+    data.append("category", values.category);
+    data.append("user_id", user.id);
+    dispatch(setLoad(true));
+    http
+      .post("/post", data)
+      .then((res) => {
+        onReset();
+        toast.success("Пост успешно добавлен!");
+        dispatch(addPost(res.data.data));
+      })
+      .catch(function (errors) {
+        toast.error(`Упс, ошибка, ${errors.message}`);
+      })
+      .finally(() => {
+        dispatch(setLoad(false));
+      });
   };
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
 
   return (
     <div className={styles.user_info}>
       <div className={styles.form_wrapper}>
         <Form
           name="basic"
+          form={form}
           initialValues={{
             remember: true,
           }}
@@ -32,35 +82,32 @@ const userInfo = () => {
           validateMessages={validateMessages}
           autoComplete="off"
         >
-          <Form.Item name="title" rules={[{ required: true, type: "email" }]}>
+          <Form.Item name="title" rules={[{ required: true }]}>
             <Input placeholder="Заголовок" />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item name="category" rules={[{ required: true }]}>
             <Select placeholder="Категория">
-              <Select.Option value="demo">Demo</Select.Option>
-              <Select.Option value="demo23">Demo1</Select.Option>
-              <Select.Option value="demo33">Demo2</Select.Option>
+              {category?.items?.map((item) => {
+                return (
+                  <Select.Option value={item.id} key={item.id}>
+                    {item.title}
+                  </Select.Option>
+                );
+              })}
             </Select>
           </Form.Item>
-
-          <Form.Item>
-            <Input.TextArea placeholder="Описание" rows={4} />
+          <Form.Item name="text">
+            {/* <Tiptap hanldeChange={hanldeChange} /> */}
+            <Jjeditor hanldeChange={hanldeChange} />
           </Form.Item>
 
-          <Form.Item valuePropName="fileList">
-            <Upload listType="picture-card">
-              <div>
-                <PlusOutlined />
-                <div
-                  style={{
-                    marginTop: 8,
-                  }}
-                >
-                  Выбрать файл
-                </div>
-              </div>
-            </Upload>
+          <Form.Item
+            valuePropName="fileList"
+            name="image"
+            rules={[{ required: true }]}
+          >
+            <Input type="file" placeholder="Заголовок" />
           </Form.Item>
 
           <Form.Item>
@@ -80,4 +127,4 @@ const userInfo = () => {
   );
 };
 
-export default userInfo;
+export default UserInfo;

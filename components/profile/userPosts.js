@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
+import Image from "next/image";
 
 // components
-import { Avatar } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
 
 // utils
@@ -17,6 +17,7 @@ import { setLoad, removePost } from "../../redux/slices/author/author";
 
 // api
 import http from "../http";
+import { API_URL } from "../api";
 
 // styles
 import styles from "../../styles/profile.module.scss";
@@ -51,29 +52,37 @@ const userPosts = () => {
 
   useEffect(() => {
     checkAuthorPosts();
+    // console.log("posts", posts[0]);
   }, [authorPosts]);
 
   return (
     <>
-      <h3 className={styles.title}>Мои пости</h3>
+      <h3 className={styles.title}>Мои посты</h3>
       <div className={styles.posts}>
-        {posts?.map((elm) => {
-          return (
-            <div className={styles.post} key={elm.id}>
-              <div className="post_img">
-                <Avatar size={64} src="https://joeschmoe.io/api/v1/random" />
-              </div>
-              <div className="post_title">
-                <Link
-                  href={`/post/${translitRuEnLowercase(elm.title)}/${elm.id}`}
-                >
-                  <a target="_blank" className={styles.post_title}>
-                    {short.shortText(elm.title, 40)}
-                  </a>
-                </Link>
-              </div>
-              <div className={styles.post_action}>
-                {elm.user_id === JSON.parse(user).id ? (
+        {posts?.length > 0 ? (
+          posts?.map((elm) => {
+            return (
+              <div className={styles.post} key={elm.id}>
+                <div className={styles.post_image}>
+                  <Image
+                    src={`${API_URL}image/${elm.imageUrl}`}
+                    className="imgCover"
+                    width={500}
+                    height={500}
+                    priority
+                    alt="post-title"
+                  />
+                </div>
+                <div className="post_title">
+                  <Link
+                    href={`/post/${translitRuEnLowercase(elm.title)}/${elm.id}`}
+                  >
+                    <a target="_blank" className={styles.post_title}>
+                      {short.shortText(elm.title, 40)}
+                    </a>
+                  </Link>
+                </div>
+                <div className={styles.post_action}>
                   <div className="d-flex align-items-center">
                     <div
                       className={styles.btn_remove}
@@ -83,13 +92,15 @@ const userPosts = () => {
                     </div>
                     {/* <EditOutlined /> */}
                   </div>
-                ) : (
-                  ""
-                )}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>
+            <h4 className={styles.title}>Здесь пока что нет ни одного поста</h4>
+          </div>
+        )}
       </div>
     </>
   );

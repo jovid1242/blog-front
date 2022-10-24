@@ -107,18 +107,14 @@ const Header = () => {
             <div className="header-right">
               <ul className="social-icons list-unstyled list-inline mb-0">
                 <li className="list-inline-item">
-                  <Link href="/">
-                    <a>
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </Link>
+                  <a href="https://instagram.com/jovid92002">
+                    <i className="fab fa-instagram"></i>
+                  </a>
                 </li>
                 <li className="list-inline-item">
-                  <Link href="/">
-                    <a>
-                      <i className="fab fa-youtube"></i>
-                    </a>
-                  </Link>
+                  <a href="https://www.youtube.com/channel/UCic_oyZ_5DvUjw0C1it7znQ">
+                    <i className="fab fa-youtube"></i>
+                  </a>
                 </li>
               </ul>
               <div className="header-buttons">

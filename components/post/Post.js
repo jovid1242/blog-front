@@ -9,9 +9,8 @@ import * as moment from "moment";
 import ReactHtmlParser from "react-html-parser";
 
 // utils
-import imageLoader from "../../utils/imageLoader";
 import { short } from "../../utils/short";
-import getAuthor from "../../utils/author";
+import { getAuthors } from "../../utils/author";
 import { translitRuEnLowercase } from "../../utils/translateUrl";
 
 // api
@@ -19,15 +18,16 @@ import { API_URL } from "../api";
 
 // moment
 import "moment/locale/ru";
-import eyeIcon from "../../assets/eye-solid.svg";
 moment.locale("ru");
 
-const Post = ({ title, text, id, date, imageUrl, author, view }) => {
+const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
   const [textPost, setTextPost] = useState("");
   const { users } = useSelector((state) => state.users);
 
+  const user = getAuthors.getAuthor(users.items, user_id);
+
   useEffect(() => {
-    const textPostToHtml = ReactHtmlParser(short.shortText(text, 350));
+    const textPostToHtml = ReactHtmlParser(short.shortText(text, 160));
     setTextPost(textPostToHtml);
   }, []);
 
@@ -42,7 +42,6 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
             <a className="inner w100">
               <Image
                 src={`${API_URL}image/${imageUrl}`}
-                loader={imageLoader}
                 style={{
                   width: "100%",
                   height: 200,
@@ -61,23 +60,40 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
         <div className="details">
           <ul className="meta list-inline mb-3 d-flex align-items-center">
             <li className="list-inline-item d-flex align-items-center">
-              <Image
-                src={`${API_URL}image/1.jpg`}
-                className="w40 mr-2"
-                alt="author"
-                style={{ borderRadius: "50%" }}
-                width={40}
-                height={40}
-                layout="intrinsic"
-              />
+              <Link href={`/author/${user_id}`}>
+                <a>
+                  <Image
+                    src={
+                      user.imageUrl !== null
+                        ? `${API_URL}image/${user.imageUrl}`
+                        : `${API_URL}image/1.jpg`
+                    }
+                    className="w40 mr-2"
+                    alt="author"
+                    style={{ borderRadius: "50%" }}
+                    width={40}
+                    height={40}
+                    layout="intrinsic"
+                  />
+                </a>
+              </Link>
+
               <div style={{ marginLeft: "12px" }}>
-                {getAuthor(users.items, author)}
+                <Link href={`/author/${user_id}`}>
+                  <a>{getAuthors.getAuthorName(users.items, user_id)}</a>
+                </Link>
               </div>
             </li>
             <li className="list-inline-item d-flex align-items-center">
               <Link href="/">
                 <a>
-                  <Image src={eyeIcon} alt="eye icon" width={10} height={10} />
+                  <Image
+                    src="/static/view-eye-svgrepo-com.svg"
+                    alt="eye icon"
+                    className="svg-path"
+                    width={12}
+                    height={12}
+                  />
                 </a>
               </Link>
               <div style={{ marginLeft: "6px" }}>{view}</div>

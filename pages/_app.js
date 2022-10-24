@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
                   trackLinks:true,
                   accurateTrackBounce:true
             });
+            
           `}
       </Script>
       <ToastContainer

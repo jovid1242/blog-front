@@ -14,9 +14,6 @@
   width: 100%;
   margin-top: 20px;
   padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .user_avatar {
   margin-right: 20px;
@@ -65,7 +62,7 @@
   align-items: center;
 }
 .form_wrapper {
-  width: 495px;
+  // width: 495px;
 }
 // posts
 .posts {
@@ -87,5 +84,14 @@
   .post_action {
     display: flex;
     align-items: center;
+  }
+  .post_image {
+    width: 80px !important;
+    height: 80px !important;
+    img {
+      width: 80px !important;
+      height: 80px !important;
+      border-radius: 12px !important;
+    }
   }
 }

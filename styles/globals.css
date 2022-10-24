@@ -12,6 +12,13 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+ul {
+  margin: 0;
+}
+ul li {
+  list-style: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -32,6 +39,17 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.c-black {
+  color: #000 !important;
+  margin-left: 10px !important;
+}
+
+.dflex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .w40 {
@@ -102,10 +120,88 @@ a {
   z-index: 98;
 }
 
+.ProseMirror > * + * {
+  margin-top: 0.75em;
+}
+
+.ProseMirror ul,
+ol {
+  padding: 0 1rem;
+}
+
+.ProseMirror h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}
+code {
+  background-color: rgba(#616161, 0.1);
+  color: #616161;
+}
+
+pre {
+  background: #0d0d0d;
+  color: #558b2f;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+pre code {
+  color: inherit;
+  padding: 1rem;
+  background: none;
+  font-size: 0.8rem;
+}
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-left: 2px solid rgba(#0d0d0d, 0.1);
+}
+.ProseMirror hr {
+  border: none;
+  border-top: 2px solid rgba(#0d0d0d, 0.1);
+  margin: 2rem 0;
+}
+
+.is-active {
+  box-shadow: 0 2px 14px #fe4f70;
+}
+.menus-editor {
+  border: 1px dashed #616161;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.editor-text-changer .ProseMirror {
+  min-height: 200px;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px dashed #616161;
+}
+.btn-editor-tip {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: 1px solid #616161;
+  background-color: none;
+  color: #000;
+  font-weight: bold;
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
 @media only screen and (max-width: 767px) {
   .w100 img {
-    width: 100% !important;
-    height: 340px !important;
+    width: 370px !important;
+    height: 200px !important;
     object-fit: cover !important;
   }
 }
