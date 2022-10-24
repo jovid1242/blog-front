@@ -10,7 +10,7 @@ import ReactHtmlParser from "react-html-parser";
 
 // utils
 import { short } from "../../utils/short";
-import getAuthor from "../../utils/author";
+import { getAuthors } from "../../utils/author";
 import { translitRuEnLowercase } from "../../utils/translateUrl";
 
 // api
@@ -20,9 +20,11 @@ import { API_URL } from "../api";
 import "moment/locale/ru";
 moment.locale("ru");
 
-const Post = ({ title, text, id, date, imageUrl, author, view }) => {
+const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
   const [textPost, setTextPost] = useState("");
   const { users } = useSelector((state) => state.users);
+
+  const user = getAuthors.getAuthor(users.items, user_id);
 
   useEffect(() => {
     const textPostToHtml = ReactHtmlParser(short.shortText(text, 160));
@@ -58,18 +60,27 @@ const Post = ({ title, text, id, date, imageUrl, author, view }) => {
         <div className="details">
           <ul className="meta list-inline mb-3 d-flex align-items-center">
             <li className="list-inline-item d-flex align-items-center">
-              <Image
-                src={`${API_URL}image/1.jpg`}
-                className="w40 mr-2"
-                alt="author"
-                style={{ borderRadius: "50%" }}
-                width={40}
-                height={40}
-                layout="intrinsic"
-              />
+              <Link href={`/author/${user_id}`}>
+                <a>
+                  <Image
+                    src={
+                      user.imageUrl !== null
+                        ? `${API_URL}image/${user.imageUrl}`
+                        : `${API_URL}image/1.jpg`
+                    }
+                    className="w40 mr-2"
+                    alt="author"
+                    style={{ borderRadius: "50%" }}
+                    width={40}
+                    height={40}
+                    layout="intrinsic"
+                  />
+                </a>
+              </Link>
+
               <div style={{ marginLeft: "12px" }}>
-                <Link href={`/author/${author}`}>
-                  <a>{getAuthor(users.items, author)}</a>
+                <Link href={`/author/${user_id}`}>
+                  <a>{getAuthors.getAuthorName(users.items, user_id)}</a>
                 </Link>
               </div>
             </li>

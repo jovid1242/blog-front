@@ -26,7 +26,11 @@ const Index = (props) => {
       <div className="site-wrapper">
         <div className="main-overlay"></div>
         <Header />
-        <AuthorBanner name={props.user.user.name} />
+        <AuthorBanner
+          name={props.user.user.name}
+          info={props.user.user?.info}
+          avatar={props.user.user?.imageUrl}
+        />
         <section className="main-content">
           <div className="container-xl">
             <div className="row gy-4">

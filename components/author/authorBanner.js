@@ -1,7 +1,9 @@
+import Image from "next/image";
 import React from "react";
-import API_URL from "../api";
+import { API_URL } from "../api";
 
-const AuthorBanner = ({ name, email, info }) => {
+const AuthorBanner = ({ name, avatar, info }) => {
+  console.log("avatar, 0", toString(avatar).length);
   return (
     <>
       <section
@@ -10,18 +12,33 @@ const AuthorBanner = ({ name, email, info }) => {
       >
         <div className="container-xl">
           <div className="cta text-center">
-            <h2 className="mt-0 mb-4">I'm {name}</h2>
+            {avatar !== null ? (
+              <Image
+                src={`${API_URL}image/${avatar}`}
+                className="w40 mr-2"
+                alt="author"
+                style={{ borderRadius: "50%" }}
+                width={150}
+                height={150}
+                layout="intrinsic"
+              />
+            ) : null}
+
+            <h2 className={"mt-0 mb-2 " + avatar}>{name}</h2>
             <p class="mt-0 mb-4">
-              Hello, I’m a content writer who is fascinated by content fashion,
-              celebrity and lifestyle. She helps clients bring the right content
-              to the right people.
+              {info !== null ? (
+                info
+              ) : (
+                <>
+                  Hello, I’m a content writer who is fascinated by content
+                  fashion, celebrity and lifestyle. She helps clients bring the
+                  right content to the right people.
+                </>
+              )}
             </p>
-            {/* <a href="#" className="btn btn-light mt-2">
-              About Me
-            </a> */}
           </div>
         </div>
-        <span className="mouse">
+        <span className="mouse mt-2">
           <span className="wheel"></span>
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 260">

@@ -1222,7 +1222,6 @@ section {
 .hero .cta {
   margin: auto;
   max-width: 700px;
-  padding-top: 120px;
   position: relative;
   z-index: 1;
 }

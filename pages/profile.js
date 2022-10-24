@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 
 import withPrivateRoute from "../components/withPrivateRoute";
 import { setUser } from "../redux/slices/auth/authSlice";
+import { toast } from "react-toastify";
 
 // components
 import Loading from "../components/loader";
@@ -18,6 +19,7 @@ export default function Profile() {
   const { authorPosts } = useSelector((state) => state.author);
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
+  const route = useRouter();
 
   const getUser = () => {
     dispatch(fetchAuthorPosts());
@@ -29,7 +31,10 @@ export default function Profile() {
         setUser(res.data.user);
       })
       .catch((err) => {
-        // console.log("err", err);
+        toast.error(err);
+        // if (err) {
+        //   route.push("/auth/login");
+        // }
       });
   };
 
