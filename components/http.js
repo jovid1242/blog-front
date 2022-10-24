@@ -1,63 +1,42 @@
 import axios from "axios";
-import Router from "next/router";
-import { toast } from "react-toastify";
-import { getCookie } from "cookies-next";
 
-const notify = (message) => {
-  toast.error(message, {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: 0,
-  });
-};
+import { setCookie, getCookie } from "cookies-next";
+export const API_URL = `http://api.ofolio.ru/api/`;
 
-const validationErrorHandler = (res) => {
-  res.errors.forEach((err) => {
-    notify(err.message);
-  });
-};
-
-const instance = axios.create({
-  baseURL: "http://api.ofolio.ru/api/",
-  // baseURL: "http://localhost:9001/api/",
+const $api = axios.create({
+  withCredentials: false,
+  baseURL: API_URL,
 });
 
-instance.interceptors.request.use(
-  (config) => {
-    // Do something before request is sent
+$api.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${getCookie("token")}`;
+  return config;
+});
 
-    config.headers["Authorization"] = `Bearer ${getCookie("token")}`;
+$api.interceptors.response.use(
+  (config) => {
     return config;
   },
-  (error) => {
-    if (!error.response) {
-      notify("Нет соединения с интернетом. Перезагрузите страницу!!");
+  async (error) => {
+    const originalRequest = error.config;
+    if (
+      error.response.status == 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+      try {
+        const response = (await axios.get)(`${API_URL}/refresh`, {
+          withCredentials: false,
+        });
+        setCookie("token", response.data.accessToken);
+        return $api.request(originalRequest);
+      } catch (e) {
+        console.log("НЕ АВТОРИЗОВАН");
+      }
     }
-    if (error.response && error.response.status == 422) {
-      validationErrorHandler(error.response.data);
-    }
-    if (error.response && error.response.status == 404) {
-      notify(error.response.data.message);
-    }
-    if (error.response && error.response.status == 403) {
-      notify(error.response.data.message);
-    }
-    if (error.response && error.response.status == 400) {
-      notify(error.response.data.message);
-    }
-    if (error.response && error.response.status == 500) {
-      notify(error.response.data.message);
-    }
-    if (error.response && error.response.status == 401) {
-      Router.push("/login");
-    }
-
-    return Promise.reject(error);
+    throw error;
   }
 );
 
-export default instance;
+export default $api;
