@@ -41,36 +41,6 @@ const Hero = () => {
         <div className="row gy-4">
           <div className="col-lg-8">
             <Slider />
-            {/* <div className="post featured-post-lg">
-              <div className="details clearfix">
-                <h2 className="post-title">
-                  <Link href="/category/1">
-                    <a>{banner?.title}</a>
-                  </Link>
-                </h2>
-                <ul className="meta list-inline mb-0">
-                  <li className="list-inline-item">
-                    <Link href="/">
-                      <a>Repost</a>
-                    </Link>
-                  </li>
-                  <li className="list-inline-item">Сегодня в 00:01</li>
-                </ul>
-              </div>
-              <Link href="/category/1">
-                <a>
-                  <div className="thumb rounded">
-                    <div
-                      className="inner data-bg-image"
-                      style={{
-                        backgroundImage: `url(${API_URL}image/${banner?.imageUrl}
-                      )`,
-                      }}
-                    ></div>
-                  </div>
-                </a>
-              </Link>
-            </div> */}
           </div>
 
           <div className="col-lg-4">

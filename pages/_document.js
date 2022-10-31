@@ -12,6 +12,9 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <script src="/static/js/plugin.js"></script>
+        <script src="/static/js/lightbox.js"></script>
+        <script src="/static/js/scripts.js"></script>
       </body>
     </Html>
   );

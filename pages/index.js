@@ -8,10 +8,8 @@ import { useSelector } from "react-redux";
 // components
 import Header from "../components/header/Header";
 import Main from "../components/main/Main";
-import Hero from "../components/section/Hero";
-import Footer from "../components/footer/Footer";
 import Loading from "../components/loader";
-import Instagran from "../components/instagram";
+import LeftNavigation from "../components/navigation/LeftNavigation";
 
 const Home = (props) => {
   const { popularPosts } = useSelector((state) => state.popularPosts);
@@ -35,11 +33,8 @@ const Home = (props) => {
         <Loading loading={popularPosts.status === "loading" ? true : false} />
         <div className="main-overlay"></div>
         <Header store={props} />
-        <Hero />
         <Main store={props} />
-        <div className="spacer" data-height="50"></div>
-        <Instagran />
-        <Footer />
+        <LeftNavigation />
       </div>
     </div>
   );
