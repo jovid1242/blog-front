@@ -10,6 +10,7 @@ import Header from "../components/header/Header";
 import Main from "../components/main/Main";
 import Loading from "../components/loader";
 import LeftNavigation from "../components/navigation/LeftNavigation";
+import withPrivateRoute from "../components/withPrivateRoute";
 
 const Home = (props) => {
   const { popularPosts } = useSelector((state) => state.popularPosts);
@@ -41,8 +42,10 @@ const Home = (props) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
+  (store) => async (ctx) => {
     await store.dispatch(fetchPosts());
+
+    withPrivateRoute(ctx);
     return {
       props: store.getState(),
     };

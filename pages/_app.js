@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { wrapper } from "../redux/store";
 import Script from "next/script";
 import { ToastContainer } from "react-toastify";
+import withPrivateRoute from "../components/withPrivateRoute";
 
 function MyApp({ Component, pageProps }) {
   return (

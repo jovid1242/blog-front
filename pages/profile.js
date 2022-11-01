@@ -61,7 +61,6 @@ export default function Profile() {
 }
 
 export const getServerSideProps = async (ctx) => {
-  const { locale } = ctx;
   withPrivateRoute(ctx);
   return {
     props: {},

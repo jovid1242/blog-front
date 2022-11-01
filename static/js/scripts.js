@@ -357,7 +357,7 @@ $(document).ready(function () {
       $("body").removeClass("theme-dark");
     }
   });
-  $("body").addClass("theme-dark");
+  // $("body").addClass("theme-dark");
 
   $('input[name="color-radio"]').on("change", function () {
     if (this.checked) {
