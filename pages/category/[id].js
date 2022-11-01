@@ -8,7 +8,6 @@ import Header from "../../components/header/Header";
 import Category from "../../components/category";
 import Sidebar from "../../components/sidebar/Sidebar";
 import PageHeader from "../../components/pageHeader/PageHeader";
-import Footer from "../../components/footer/Footer";
 
 const Index = (props) => {
   return (
@@ -34,7 +33,6 @@ const Index = (props) => {
             </div>
           </div>
         </section>
-        <Footer />
       </div>
     </div>
   );
