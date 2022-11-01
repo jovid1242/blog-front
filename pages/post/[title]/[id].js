@@ -9,7 +9,6 @@ import Header from "../../../components/header/Header";
 
 // styles
 import styles from "../../../styles/Home.module.css";
-import Footer from "../../../components/footer/Footer";
 import { translitRuEnLowercase } from "../../../utils/translateUrl";
 
 const Index = ({ post }) => {
@@ -39,7 +38,6 @@ const Index = ({ post }) => {
             </div>
           </div>
         </section>
-        <Footer />
       </div>
     </div>
   );
