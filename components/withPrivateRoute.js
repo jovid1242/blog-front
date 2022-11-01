@@ -5,7 +5,7 @@ const withPrivateRoute = (ctx) => {
   const { cookies } = req;
   if (cookies.token && resolvedUrl === "/auth/login") {
     ctx.res?.writeHead(302, {
-      Location: "/profile",
+      Location: "/",
     });
     ctx.res?.end();
     return false;
