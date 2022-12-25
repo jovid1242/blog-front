@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -5,9 +6,9 @@ import Link from "next/link";
 
 // antd
 import { Button, Form, Input } from "antd";
-// import { UserOutlined } from "@ant-design/icons";
 
 // slice
+import { fetchCategory } from "../../redux/slices/category";
 import { fetchRegister } from "../../redux/slices/auth/authSlice";
 
 // components
@@ -20,6 +21,10 @@ const Register = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const route = useRouter();
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
 
   const validateMessages = {
     required: "Пожалуйста, введите ваше ${label} ",
