@@ -22,7 +22,7 @@ import "moment/locale/ru";
 
 moment.locale("ru");
 
-const PostCategory = ({ post }) => {
+const PostCategory = ({ post , col = "col-sm-6"}) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -47,8 +47,8 @@ const PostCategory = ({ post }) => {
   }, []);
 
   return (
-    <div className="col-sm-6">
-      <div className="post post-grid rounded bordered">
+    <div className={col}>
+      <div className="post post-grid rounded bordered mb-2">
         <div className="thumb top-rounded">
           <Link href={`/category/${router.query.id}`}>
             <a className="category-badge position-absolute">

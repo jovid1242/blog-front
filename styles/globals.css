@@ -53,9 +53,8 @@ a {
 }
 
 .w40 {
-  width: 40px !important;
+  width: 80px !important;
   height: 40px !important;
-  border-radius: 50% !important;
 }
 .w40 span {
   width: 40px !important;
@@ -63,16 +62,14 @@ a {
   position: relative !important;
 }
 .w40 div {
-  width: 40px !important;
-  height: 40px !important;
+  width: 70px !important;
+  height: 50px !important;
   position: relative !important;
 }
 
 .w40 div img {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
+  width: 50px !important;
+  height: 50px !important;
 }
 
 .w-auto-40 {
@@ -200,6 +197,21 @@ pre code {
 
 .ant-carousel .slick-dots-bottom {
   bottom: 65px !important;
+}
+
+.author-picture {
+  width: 70px !important;
+  height: 50px !important;
+}
+
+.author-picture div {
+  width: 70px !important;
+  height: 50px !important;
+}
+
+.author-picture div img{
+  width: 50px !important;
+  height: 50px !important;
 }
 
 @media only screen and (max-width: 767px) {

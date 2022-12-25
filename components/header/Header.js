@@ -50,12 +50,7 @@ const Header = () => {
             <Link href="/">
               <a className="navbar-brand w40">
                 <Image
-                  src={`${API_URL}image/1.jpg`}
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                  }}
+                  src="/static/nlogo.png" 
                   width={50}
                   height={50}
                   layout="responsive"

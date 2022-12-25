@@ -65,14 +65,14 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                   <Image
                     src={
                       user.imageUrl !== null
-                        ? `${API_URL}image/${user.imageUrl}`
+                        ? '/static/nlogo.png'
                         : `${API_URL}image/1.jpg`
                     }
-                    className="w40 mr-2"
+                    className="author-picture mr-2"
                     alt="author"
                     style={{ borderRadius: "50%" }}
-                    width={40}
-                    height={40}
+                    width={60}
+                    height={50}
                     layout="intrinsic"
                   />
                 </a>

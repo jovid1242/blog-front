@@ -4,14 +4,12 @@ import Head from "next/head";
 import http from "../../components/http";
 
 // components
-import Header from "../../components/header/Header";
-import Category from "../../components/category";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Header from "../../components/header/Header"; 
 import Footer from "../../components/footer/Footer";
 import AuthorBanner from "../../components/author/authorBanner";
+import PostCategory from "../../components/category/PostCategory";
 
-const Index = (props) => {
-  // console.log("props.user", props.user);
+const Index = (props) => { 
   return (
     <div>
       <Head>
@@ -32,10 +30,17 @@ const Index = (props) => {
           avatar={props.user.user?.imageUrl}
         />
         <section className="main-content">
-          <div className="container-xl">
-            <div className="row gy-4">
-              <Category posts={props.post} />
-              <Sidebar />
+          <div className="container-md">
+            <div className="row">
+              {props.post?.rows.length > 0 ? (
+                props.post.rows.map((post) => {
+                  return <PostCategory post={post} key={post.id} col="col-sm-4 col-md-4" />;
+                })
+              ) : (
+                <>
+                  <h2>Здесь пока что нет ни одного поста</h2>
+                </>
+              )}
             </div>
           </div>
         </section>
