@@ -42,12 +42,12 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
             <a className="inner w100">
               <Image
                 src={`${API_URL}image/${imageUrl}`}
-                style={{
-                  width: "100%",
-                  height: 200,
-                  objectFit: "cover",
-                  borderRadius: "15px",
-                }}
+                // style={{
+                //   width: "100%",
+                //   height: 200,
+                //   objectFit: "cover",
+                //   borderRadius: "15px",
+                // }}
                 width={1000}
                 height={1000}
                 className="imgCover w100"
@@ -69,8 +69,7 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                         : `${API_URL}image/1.jpg`
                     }
                     className="author-picture mr-2"
-                    alt="author"
-                    style={{ borderRadius: "50%" }}
+                    alt="author" 
                     width={60}
                     height={50}
                     layout="intrinsic"

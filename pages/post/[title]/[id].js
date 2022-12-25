@@ -1,7 +1,9 @@
 import Head from "next/head";
+import { useDispatch } from "react-redux";
 import FullPost from "../../../components/fullPost/FullPost";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
+import { fetchCategory } from "../../../redux/slices/category";
 import http from "../../../components/http";
 
 // components
@@ -13,6 +15,8 @@ import Footer from "../../../components/footer/Footer";
 import { translitRuEnLowercase } from "../../../utils/translateUrl";
 
 const Index = ({ post }) => {
+  const dispatch = useDispatch();
+  dispatch(fetchCategory());
   return (
     <div className={styles.container}>
       <Head>

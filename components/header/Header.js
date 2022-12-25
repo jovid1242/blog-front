@@ -92,7 +92,7 @@ const Header = () => {
                 ) : (
                   <li className="nav-item" onClick={() => closeMenu()}>
                     <Link href="/profile">
-                      <a className="nav-link">Профиль</a>
+                      <a className="nav-link">Публикация</a>
                     </Link>
                   </li>
                 )}
@@ -147,8 +147,7 @@ const Header = () => {
           <Link href="/">
             <a className="navbar-brand w40">
               <Image
-                src={`${API_URL}image/1.jpg`}
-                style={{ borderRadius: "50%" }}
+                src={`${API_URL}image/1.jpg`} 
                 width={40}
                 height={40}
                 layout="responsive"

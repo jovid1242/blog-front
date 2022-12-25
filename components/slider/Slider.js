@@ -27,8 +27,6 @@ const Slider = () => {
     return getAuthors.getAuthor(users.items, user_id);
   };
 
-  console.log("popularPosts", popularPosts);
-
   return (
     <>
       <Carousel dotPosition={"bottom"} autoplay>

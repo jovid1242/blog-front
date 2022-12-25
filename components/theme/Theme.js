@@ -8,17 +8,7 @@ const Theme = ({ category }) => {
   return (
     <div className="widget rounded">
       <div className="widget-header text-center">
-        <h3 className="widget-title">Исследуйте темы</h3>
-        <div className="w-auto-40">
-          <Image
-            src={`${API_URL}image/wave.svg`}
-            width={30}
-            height={30}
-            layout="responsive"
-            className="wave"
-            alt="wave"
-          />
-        </div>
+        <h3 className="widget-title">Исследуйте темы</h3> 
       </div>
       <div className="widget-content">
         <ul className="list">

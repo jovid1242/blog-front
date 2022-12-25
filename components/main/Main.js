@@ -10,6 +10,7 @@ const Main = ({ store }) => {
   useEffect(() => {
     dispatch(fetchAuthors());
   }, []);
+  
   return (
     <section className="main-content">
       <div className="container-xl">

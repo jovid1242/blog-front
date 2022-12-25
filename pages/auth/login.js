@@ -1,26 +1,24 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-import Link from "next/link";
+import Link from "next/link"; 
 
-// antd
-import { Button, Form, Input } from "antd";
-// import { UserOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
+import { Button, Form, Input } from "antd"; 
 
 // slice
+import { fetchCategory } from "../../redux/slices/category";
 import { fetchLogin } from "../../redux/slices/auth/authSlice";
-
-// components
+ 
 import Header from "../../components/header/Header";
-
-// styles
+ 
 import style from "../../styles/login.module.scss";
 
 const Login = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const route = useRouter();
+
+  dispatch(fetchCategory());
 
   const validateMessages = {
     required: "Пожалуйста, введите ваше ${label} ",

@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { fetchCategory } from "../../redux/slices/category";
 
 // api
 import http from "../../components/http";
@@ -9,8 +11,11 @@ import Category from "../../components/category";
 import Sidebar from "../../components/sidebar/Sidebar";
 import PageHeader from "../../components/pageHeader/PageHeader";
 import Footer from "../../components/footer/Footer";
+import PostCategory from "../../components/category/PostCategory";
 
 const Index = (props) => {
+  const dispatch = useDispatch();
+  dispatch(fetchCategory());
   return (
     <div>
       <Head>
@@ -27,10 +32,23 @@ const Index = (props) => {
         <Header />
         <PageHeader />
         <section className="main-content">
-          <div className="container-xl">
-            <div className="row gy-4">
-              <Category posts={props} />
-              <Sidebar />
+          <div className="container-md">
+            <div className="row">
+              {props?.rows.length > 0 ? (
+                props.rows.map((post) => {
+                  return (
+                    <PostCategory
+                      post={post}
+                      key={post.id}
+                      col="col-sm-4 col-md-4"
+                    />
+                  );
+                })
+              ) : (
+                <>
+                  <h2>Здесь пока что нет ни одного поста</h2>
+                </>
+              )}
             </div>
           </div>
         </section>

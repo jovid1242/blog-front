@@ -55,11 +55,7 @@ const FullPost = ({ post }) => {
                           : `${API_URL}image/1.jpg`
                       }
                       className="w40 mr-2 avatar-img"
-                      alt="author"
-                      style={{
-                        borderRadius: "50%",
-                        boxShadow: "0 2px 15px red",
-                      }}
+                      alt="author" 
                       width={40}
                       height={40}
                       layout="intrinsic"

@@ -1,15 +1,19 @@
 import Head from "next/head";
+import { useDispatch } from "react-redux";
+import { fetchCategory } from "../../redux/slices/category";
 
 // api
 import http from "../../components/http";
 
 // components
-import Header from "../../components/header/Header"; 
+import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import AuthorBanner from "../../components/author/authorBanner";
 import PostCategory from "../../components/category/PostCategory";
 
-const Index = (props) => { 
+const Index = (props) => {
+  const dispatch = useDispatch();
+  dispatch(fetchCategory());
   return (
     <div>
       <Head>
@@ -34,7 +38,13 @@ const Index = (props) => {
             <div className="row">
               {props.post?.rows.length > 0 ? (
                 props.post.rows.map((post) => {
-                  return <PostCategory post={post} key={post.id} col="col-sm-4 col-md-4" />;
+                  return (
+                    <PostCategory
+                      post={post}
+                      key={post.id}
+                      col="col-sm-4 col-md-4"
+                    />
+                  );
                 })
               ) : (
                 <>
