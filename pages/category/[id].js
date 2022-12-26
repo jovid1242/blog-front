@@ -7,9 +7,7 @@ import { fetchCategory } from "../../redux/slices/category";
 import http from "../../components/http";
 
 // components
-import Header from "../../components/header/Header";
-import Category from "../../components/category";
-import Sidebar from "../../components/sidebar/Sidebar";
+import Header from "../../components/header/Header"; 
 import PageHeader from "../../components/pageHeader/PageHeader";
 import Footer from "../../components/footer/Footer";
 import PostCategory from "../../components/category/PostCategory";
@@ -20,6 +18,7 @@ const Index = (props) => {
   useEffect(() => {
     dispatch(fetchCategory());
   }, []);
+  
   return (
     <div>
       <Head>

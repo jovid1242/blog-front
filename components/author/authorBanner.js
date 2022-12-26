@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { API_URL } from "../api";
 
-const AuthorBanner = ({ name, avatar, info }) => { 
+const AuthorBanner = ({ name, avatar, info }) => {
   return (
     <>
       <section
@@ -11,16 +11,14 @@ const AuthorBanner = ({ name, avatar, info }) => {
       >
         <div className="container-xl">
           <div className="cta text-center">
-            {avatar !== null ? (
-              <Image
-                src={`${API_URL}image/${avatar}`}
-                className="w40 mr-2"
-                alt="author" 
-                width={150}
-                height={150}
-                layout="intrinsic"
-              />
-            ) : null}
+            <Image
+              src={!avatar ? "/static/insta-2.jpg" : `${API_URL}image/${avatar}`}
+              className="w40 mr-2 border50"
+              alt="author"
+              width={150}
+              height={150}
+              layout="intrinsic"
+            />
 
             <h2 className={"mt-0 mb-2 " + avatar}>{name}</h2>
             <p className="mt-0 mb-4">

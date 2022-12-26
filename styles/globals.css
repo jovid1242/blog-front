@@ -247,7 +247,7 @@ pre code {
   user-select: none;
 }
 
-.text-content {
+/* .text-content {
   position: relative;
   width: 100%;
   height: 250px;
@@ -263,6 +263,10 @@ pre code {
   width: 56%;
   height: 41px;
   background: #ffffff;
+} */
+
+.border50 {
+  border-radius: 50% !important;
 }
 
 @media only screen and (max-width: 767px) {

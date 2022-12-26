@@ -24,7 +24,7 @@ const FullPost = ({ post }) => {
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  const user = getAuthors.getAuthor(users.items, post.user_id); 
+  const user = getAuthors.getAuthor(users.items, post.user_id);
 
   const IsJsonString = (str) => {
     try {
@@ -35,7 +35,7 @@ const FullPost = ({ post }) => {
     return true;
   };
 
-  const parseText = () => { 
+  const parseText = () => {
     if (IsJsonString()) {
       var textPostToHtml = ReactHtmlParser(
         convertDataToHtml(JSON.parse(post.text).blocks)
@@ -66,11 +66,11 @@ const FullPost = ({ post }) => {
                   <a>
                     <Image
                       src={
-                        user.imageUrl !== null
-                          ? `${API_URL}image/${user.imageUrl}`
-                          : `${API_URL}image/1.jpg`
+                        !user.imageUrl
+                          ? "/static/insta-2.jpg"
+                          : `${API_URL}image/${user.imageUrl}`
                       }
-                      className="w40 mr-2 avatar-img"
+                      className="w40 mr-2 avatar-img border50"
                       alt="author"
                       width={40}
                       height={40}

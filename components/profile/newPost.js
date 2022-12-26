@@ -25,7 +25,7 @@ const NewPost = () => {
   const [form] = Form.useForm();
   const { category } = useSelector((state) => state.category);
   const { user } = useSelector((state) => state.auth);
-  const [content, setContent] = useState({})
+  const [content, setContent] = useState({});
 
   const validateMessages = {
     required: "Пожалуйста, заполните поля ${label} ",
@@ -35,14 +35,14 @@ const NewPost = () => {
     form.resetFields();
   };
 
-  const onFinish = (values) => { 
+  const onFinish = (values) => {
     const data = new FormData();
     data.append("title", values.title);
     data.append("text", JSON.stringify(content));
     data.append("image", values.image.target.files[0]);
     data.append("category", values.category);
     data.append("user_id", user.id);
- 
+
     dispatch(setLoad(true));
     http
       .post("/post", data)
@@ -66,7 +66,6 @@ const NewPost = () => {
   return (
     <div className={styles.user_info}>
       <div className={styles.form_wrapper}>
-        
         <Form
           name="basic"
           form={form}
@@ -78,39 +77,45 @@ const NewPost = () => {
           autoComplete="off"
         >
           <Form.Item name="title" rules={[{ required: true }]}>
-            <Input placeholder="Заголовок" />
+            <Input placeholder="Заголовок" size="large" />
           </Form.Item>
 
-          <Form.Item name="category" rules={[{ required: true }]}>
-            <Select placeholder="Категория">
-              {category?.items?.map((item) => {
-                return (
-                  <Select.Option value={item.id} key={item.id}>
-                    {item.title}
-                  </Select.Option>
-                );
-              })}
-            </Select>
-          </Form.Item>
-          <Form.Item name="text"> 
+          <div className="row">
+            <div className="col-sm-6">
+              <Form.Item
+                valuePropName="fileList"
+                name="image"
+                rules={[{ required: true }]}
+              >
+                <Input type="file" placeholder="Заголовок" size="middle" />
+              </Form.Item>
+            </div>
+            <div className="col-sm-6">
+              <Form.Item name="category" rules={[{ required: true }]}>
+                <Select placeholder="Категория" size="large">
+                  {category?.items?.map((item) => {
+                    return (
+                      <Select.Option value={item.id} key={item.id}>
+                        {item.title}
+                      </Select.Option>
+                    );
+                  })}
+                </Select>
+              </Form.Item>
+            </div>
+          </div>
+
+          <Form.Item name="text">
             <Jjeditor setContent={setContent} />
-          </Form.Item>
-
-          <Form.Item
-            valuePropName="fileList"
-            name="image"
-            rules={[{ required: true }]}
-          >
-            <Input type="file" placeholder="Заголовок" />
           </Form.Item>
 
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
+              size="large"
               loading={false}
-              block
-              ghost
+              block 
             >
               Добавить
             </Button>

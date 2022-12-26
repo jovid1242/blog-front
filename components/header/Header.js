@@ -144,7 +144,7 @@ const Header = () => {
 
         {/* <!-- logo --> */}
         <div className="logo">
-          <Link href="/">
+          {/* <Link href="/">
             <a className="navbar-brand w40">
               <Image
                 src={`${API_URL}image/1.jpg`} 
@@ -154,7 +154,7 @@ const Header = () => {
                 alt="logo"
               />
             </a>
-          </Link>
+          </Link> */}
         </div>
 
         {/* 

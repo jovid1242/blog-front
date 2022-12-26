@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import ReactHtmlParser from "react-html-parser";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAuthors } from "../../redux/slices/users";
+import { fetchAuthors } from "../../redux/slices/users"; 
 
 // next
 import Link from "next/link";
@@ -9,7 +8,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 
 // utils
-import { short } from "../../utils/short";
 import { getAuthors } from "../../utils/author";
 import { translitRuEnLowercase } from "../../utils/translateUrl";
 
@@ -22,9 +20,10 @@ import "moment/locale/ru";
 
 moment.locale("ru");
 
-const PostCategory = ({ post , col = "col-sm-6"}) => {
+const PostCategory = ({ post, col = "col-sm-6" }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+ 
 
   const { category } = useSelector((state) => state.category);
   const { users } = useSelector((state) => state.users);
@@ -34,13 +33,6 @@ const PostCategory = ({ post , col = "col-sm-6"}) => {
   const filterCategory = category?.items.filter(
     (elm) => elm.id == router.query.id
   );
-
-  const [textPost, setTextPost] = useState("");
-
-  useEffect(() => {
-    const textPostToHtml = ReactHtmlParser(short.shortText(post.text, 100));
-    setTextPost(textPostToHtml);
-  }, []);
 
   useEffect(() => {
     dispatch(fetchAuthors());
@@ -63,7 +55,7 @@ const PostCategory = ({ post , col = "col-sm-6"}) => {
             <a>
               <div className="inner">
                 <Image
-                  src={`${API_URL}image/${post.imageUrl}`} 
+                  src={`${API_URL}image/${post.imageUrl}`}
                   className="imgCover"
                   width={1000}
                   height={600}
@@ -81,12 +73,12 @@ const PostCategory = ({ post , col = "col-sm-6"}) => {
                 <a>
                   <Image
                     src={
-                      user.imageUrl !== null
-                        ? `${API_URL}image/${user.imageUrl}`
-                        : `${API_URL}image/1.jpg`
+                      !user.imageUrl
+                        ? "/static/insta-2.jpg"
+                        : `${API_URL}image/${user.imageUrl}`
                     }
-                    className="w40 mr-2 avatar-img"
-                    alt="author" 
+                    className="w40 mr-2 avatar-img border50"
+                    alt="author"
                     width={40}
                     height={40}
                     layout="intrinsic"
@@ -121,10 +113,9 @@ const PostCategory = ({ post , col = "col-sm-6"}) => {
             <Link
               href={`/post/${translitRuEnLowercase(post.title)}/${post.id}`}
             >
-              <a>{short.shortText(post.title, 50)}</a>
+              <a>{post.title}</a>
             </Link>
           </h5>
-          <span className="excerpt mb-0">{textPost}</span>
         </div>
       </div>
     </div>

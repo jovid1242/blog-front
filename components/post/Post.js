@@ -26,10 +26,11 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
   const { users } = useSelector((state) => state.users);
 
   const user = getAuthors.getAuthor(users.items, user_id);
+  console.log('-ddddddd', user);
 
   const IsJsonString = (str) => {
     try {
-      JSON.parse(text);
+      JSON.parse(str);
     } catch (e) {
       return false;
     }
@@ -37,13 +38,14 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
   };
 
   const parseText = () => {
-    if (IsJsonString()) {
+    if (IsJsonString(text)) {
       const textPostToHtml = ReactHtmlParser(
         convertDataToHtml(JSON.parse(text).blocks)
       );
-      setTextPost(textPostToHtml);
+      setTextPost(short.shortText(textPostToHtml[0].props.children[1], 160)); 
     } else {
-      setTextPost(short.shortText(ReactHtmlParser(text), 160));
+      const textPostToHtml = ReactHtmlParser(short.shortText(text, 160))
+      setTextPost(textPostToHtml); 
     }
   };
 
@@ -84,13 +86,13 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                 <a>
                   <Image
                     src={
-                      user.imageUrl !== null
-                        ? "/static/nlogo.png"
-                        : `${API_URL}image/1.jpg`
+                      !user.imageUrl
+                        ? "/static/insta-2.jpg"
+                        : `${API_URL}image/${user.imageUrl}`
                     }
-                    className="author-picture mr-2"
+                    className="author-picture mr-2 border50"
                     alt="author"
-                    width={60}
+                    width={50}
                     height={50}
                     layout="intrinsic"
                   />
@@ -121,7 +123,7 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
           </ul>
           <h5 className="post-title">
             <Link href={`/post/${translitRuEnLowercase(title)}/${id}`}>
-              <a>{short.shortText(title, 50)}</a>
+              <a>{title}</a>
             </Link>
           </h5>
           <span className="excerpt mb-0 ">{textPost}</span>
