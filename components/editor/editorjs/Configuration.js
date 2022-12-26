@@ -22,7 +22,7 @@ const Configuration = () => {
       form_data.append("upload_preset", preset);
     }
     if (file) {
-      form_data.append("file", file);
+      form_data.append("image", file);
       const imageUrl = await CloudImage(form_data);
 
       if (imageUrl) {

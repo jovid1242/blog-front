@@ -9,7 +9,7 @@ export const CloudImage = async (form_data) => {
     const data = await imgUpload.json();
 
     if (data) {
-      return data.secure_url;
+      return data.file;
     }
   } catch (err) {}
 };

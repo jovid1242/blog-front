@@ -23,19 +23,17 @@ const Editor = ({setContent }) => {
       form_data.append("upload_preset", preset);
     }
     if (file) {
-      form_data.append("file", file);
-      const imageUrl = await CloudImage(form_data);
+      form_data.append("image", file);
+      const imageUrl = await CloudImage(form_data); 
 
       if (imageUrl) {
-        // console.log(imageUrl);
-
         return imageUrl;
       } else {
-        return "nahi hai image"; // <-- put an error image url here
+        return "Ошибка при загрузка файла"; // <-- put an error image url here
       }
     }
 
-    return " nahi hai hai image"; // <-- put an error image url here
+    return "Ошибка при загрузка файла"; // <-- put an error image url here
   };
 
   const Configuration = () => {
