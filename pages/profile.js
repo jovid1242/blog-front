@@ -3,15 +3,14 @@ import { useRouter } from "next/router";
 import { setCookie } from "cookies-next";
 
 import withPrivateRoute from "../components/withPrivateRoute";
-import { setUser } from "../redux/slices/auth/authSlice";
 import { toast } from "react-toastify";
 
 // components
 import Loading from "../components/loader";
 import http from "../components/http";
 import ProfileHeader from "../components/profile/profileHeader";
-import UserInfo from "../components/profile/userInfo";
-import UserPosts from "../components/profile/userPosts";
+import NewPost from "../components/profile/newPost";
+import UserPosts from '../components/profile/userPosts'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthorPosts } from "../redux/slices/author/author";
 
@@ -32,9 +31,6 @@ export default function Profile() {
       })
       .catch((err) => {
         toast.error(err);
-        // if (err) {
-        //   route.push("/auth/login");
-        // }
       });
   };
 
@@ -49,9 +45,7 @@ export default function Profile() {
         <ProfileHeader user={user} />
         <div className="row mt-4">
           <div className="col-lg-12">
-            <UserInfo />
-          </div>
-          <div className="col-lg-12">
+            <NewPost />
             <UserPosts />
           </div>
         </div>

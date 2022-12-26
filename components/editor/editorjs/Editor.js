@@ -1,56 +1,20 @@
-import React, { useEffect, useRef } from "react";
-
+import React, { useState, useEffect } from "react";
 import EditorJS from "@editorjs/editorjs";
+
 import Header from "@editorjs/header";
 import LinkTool from "@editorjs/link";
 import RawTool from "@editorjs/raw";
 import ImageTool from "@editorjs/image";
 import Checklist from "@editorjs/checklist";
-import List from "@editorjs/list";
 import Quote from "@editorjs/quote";
 import CodeTool from "@editorjs/code";
 import { StyleInlineTool } from "editorjs-style";
 import Tooltip from "editorjs-tooltip";
-import { CloudImage } from "./UploadImage/CloudImage";
-import _ from "lodash/debounce";
 
-const DEFAULT_INITIAL_DATA = () => {
-  return {
-    time: new Date().getTime(),
-    blocks: [
-      {
-        type: "paragraph",
-        data: {
-          text: "Начни писать сюда!!!",
-          level: 1,
-        },
-      },
-    ],
-  };
-};
+import { CloudImage } from "../UploadImage/CloudImage";
 
-const EDITTOR_HOLDER_ID = "editorjs";
-
-const CustomEditor = (props) => {
-  const { setContent, content } = props;
-
-  const isInstance = useRef && EditorJS;
-
-  /////////////////////////////////////////////////////////////////////////
-  useEffect(() => {
-    if (!isInstance.current) {
-      initEditor();
-    }
-    return () => {
-      if (isInstance.current) {
-        isInstance.current.destroy();
-        isInstance.current = null;
-      }
-    };
-  }, []);
-  //////////////////////////////////////////////////////////////////////////////
-
-  // save images in Cloudinary
+const Editor = ({setContent }) => {
+  const [editor, setEditor] = useState({});
 
   const onFileChange = async (file) => {
     const form_data = new FormData();
@@ -74,19 +38,11 @@ const CustomEditor = (props) => {
     return " nahi hai hai image"; // <-- put an error image url here
   };
 
-  //
-  const initEditor = () => {
-    const editor = new EditorJS({
-      holder: EDITTOR_HOLDER_ID,
-      data: content === "" ? DEFAULT_INITIAL_DATA() : content,
-      onReady: () => {
-        isInstance.current = editor;
-      },
-      onChange: _(function () {
-        try {
-          contents();
-        } catch (err) {}
-      }, 3000),
+  const Configuration = () => {
+    // save images in Cloudinary
+
+    return {
+      holder: "editorjs",
       autofocus: true,
       tools: {
         style: StyleInlineTool,
@@ -101,7 +57,6 @@ const CustomEditor = (props) => {
             holder: "editorId",
           },
         },
-
         header: {
           class: Header,
           inlineToolbar: true,
@@ -109,9 +64,7 @@ const CustomEditor = (props) => {
             defaultLevel: 1,
           },
         },
-
         raw: RawTool,
-        linkTool: LinkTool,
         image: {
           class: ImageTool,
           config: {
@@ -134,13 +87,6 @@ const CustomEditor = (props) => {
           class: Checklist,
           inlineToolbar: true,
         },
-        list: {
-          class: List,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: "unordered",
-          },
-        },
         quote: {
           class: Quote,
           inlineToolbar: true,
@@ -155,19 +101,44 @@ const CustomEditor = (props) => {
           inlineToolbar: true,
         },
       },
-    });
-    async function contents() {
-      const output = await editor.save();
-      const content = JSON.stringify(output);
-      setContent(content);
-    }
+      /**
+       * Previously saved data that should be rendered
+       */
+      //  onReady: () => {
+      //     console.log('Editor.js is ready to work!')
+      //  },
+       onChange: (api, event) => {
+          api.saver.save().then((outputData) => {
+            setContent(outputData);
+          }) 
+      },
+
+      data: {
+        time: 1643195431504,
+        blocks: [
+          {
+            id: "o72AO0sY-1",
+            type: "paragraph",
+            data: {
+              text: "Начни писать сюда!!!",
+            },
+          },
+        ],
+        version: "2.22.2",
+      },
+    };
   };
 
+  useEffect(() => {
+    const editor = new EditorJS(Configuration());
+    setEditor(editor);
+  }, []);
+
   return (
-    <div className="Editor_class">
-      <div id={EDITTOR_HOLDER_ID}> </div>
+    <div>
+      <div id="editorjs" />
     </div>
   );
 };
 
-export default CustomEditor;
+export default Editor;

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { fetchCategory } from "../../redux/slices/category";
@@ -15,7 +16,10 @@ import PostCategory from "../../components/category/PostCategory";
 
 const Index = (props) => {
   const dispatch = useDispatch();
-  dispatch(fetchCategory());
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
   return (
     <div>
       <Head>

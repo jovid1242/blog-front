@@ -1,8 +1,10 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
+import Image from "next/image"; 
 import Link from "next/link";
-import { Button, Modal, Form, Input, Space, Badge, Avatar } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+
+import { Button, Modal, Form, Input, Space, Badge, Avatar } from "antd";
 import { toast } from "react-toastify";
 
 // api
@@ -18,11 +20,8 @@ import { RollbackOutlined } from "@ant-design/icons";
 
 // styles
 import styles from "../../styles/profile.module.scss";
-import Image from "next/image";
-import { useEffect } from "react";
 
 const ProfileHeader = ({ user }) => {
-  // console.log("user", user);
   const router = useRouter();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
@@ -90,7 +89,7 @@ const ProfileHeader = ({ user }) => {
           <RollbackOutlined style={{ fontSize: "2rem" }} />
         </a>
       </Link>
-      <Space direction="horizontal">
+      {/* <Space direction="horizontal">
         <Badge count={1}>
           {user.imageUrl === null ? (
             <Avatar shape="square" size="large" />
@@ -169,7 +168,7 @@ const ProfileHeader = ({ user }) => {
             </Button>
           </Form.Item>
         </Form>
-      </Modal>
+      </Modal> */}
       <div className={styles.user_edit_btn}>
         <button onClick={() => isLogout()}>Выйти</button>
       </div>

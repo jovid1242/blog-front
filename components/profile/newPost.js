@@ -14,18 +14,18 @@ import { fetchCategory } from "../../redux/slices/category";
 // styles
 
 import dynamic from "next/dynamic";
-const Jjeditor = dynamic(() => import("../editor/JoditEditor"), {
+const Jjeditor = dynamic(() => import("../editor/editorjs/Editor"), {
   ssr: false,
 });
 import styles from "../../styles/profile.module.scss";
 // import Jjeditor from "";
 
-const UserInfo = () => {
+const NewPost = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { category } = useSelector((state) => state.category);
   const { user } = useSelector((state) => state.auth);
-  const [htmlContent, setHtmlContent] = useState("");
+  const [content, setContent] = useState({})
 
   const validateMessages = {
     required: "Пожалуйста, заполните поля ${label} ",
@@ -35,20 +35,14 @@ const UserInfo = () => {
     form.resetFields();
   };
 
-  const hanldeChange = (html) => {
-    setHtmlContent(html);
-  };
-
-  const onFinish = (values) => {
-    if (htmlContent === "Начни писать сюда!!!") {
-      toast.error("Добавьте описание поста");
-    }
+  const onFinish = (values) => { 
     const data = new FormData();
     data.append("title", values.title);
-    data.append("text", htmlContent);
+    data.append("text", JSON.stringify(content));
     data.append("image", values.image.target.files[0]);
     data.append("category", values.category);
     data.append("user_id", user.id);
+ 
     dispatch(setLoad(true));
     http
       .post("/post", data)
@@ -72,6 +66,7 @@ const UserInfo = () => {
   return (
     <div className={styles.user_info}>
       <div className={styles.form_wrapper}>
+        
         <Form
           name="basic"
           form={form}
@@ -97,9 +92,8 @@ const UserInfo = () => {
               })}
             </Select>
           </Form.Item>
-          <Form.Item name="text">
-            {/* <Tiptap hanldeChange={hanldeChange} /> */}
-            <Jjeditor hanldeChange={hanldeChange} />
+          <Form.Item name="text"> 
+            <Jjeditor setContent={setContent} />
           </Form.Item>
 
           <Form.Item
@@ -127,4 +121,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default NewPost;

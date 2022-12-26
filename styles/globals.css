@@ -134,24 +134,23 @@ h5,
 h6 {
   line-height: 1.1;
 }
-code {
-  background-color: rgba(#616161, 0.1);
-  color: #616161;
-}
 
 pre {
-  background: #0d0d0d;
-  color: #558b2f;
   font-family: "JetBrainsMono", monospace;
+  min-height: 200px;
+  background: #1e2128;
+  color: #a1a7b6;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
 }
+
 pre code {
+  width: 100%;
+  min-height: 200px;
   color: inherit;
-  padding: 1rem;
-  background: none;
   font-size: 0.8rem;
 }
+
 .ProseMirror img {
   max-width: 100%;
   height: auto;
@@ -209,9 +208,61 @@ pre code {
   height: 50px !important;
 }
 
-.author-picture div img{
+.author-picture div img {
   width: 50px !important;
   height: 50px !important;
+}
+._1checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+._1checkbox_round {
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  margin-left: 0;
+  margin-right: 7px;
+  border-radius: 50%;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  user-select: none;
+}
+._1checkbox_actived {
+  background: #388ae5;
+  border-color: #388ae5;
+  display: inline-block;
+  flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  margin-left: 0;
+  margin-right: 7px;
+  border-radius: 50%;
+  border: 1px solid #d0d0d0;
+  user-select: none;
+}
+
+.text-content {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.text-content::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  right: 0;
+  width: 56%;
+  height: 41px;
+  background: #ffffff;
 }
 
 @media only screen and (max-width: 767px) {

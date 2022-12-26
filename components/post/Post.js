@@ -18,6 +18,7 @@ import { API_URL } from "../api";
 
 // moment
 import "moment/locale/ru";
+import { convertDataToHtml } from "../../utils/convertDataToHtml";
 moment.locale("ru");
 
 const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
@@ -26,13 +27,32 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
 
   const user = getAuthors.getAuthor(users.items, user_id);
 
+  const IsJsonString = (str) => {
+    try {
+      JSON.parse(text);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  const parseText = () => {
+    if (IsJsonString()) {
+      const textPostToHtml = ReactHtmlParser(
+        convertDataToHtml(JSON.parse(text).blocks)
+      );
+      setTextPost(textPostToHtml);
+    } else {
+      setTextPost(short.shortText(ReactHtmlParser(text), 160));
+    }
+  };
+
   useEffect(() => {
-    const textPostToHtml = ReactHtmlParser(short.shortText(text, 160));
-    setTextPost(textPostToHtml);
+    parseText();
   }, []);
 
   return (
-    <div className="col-md-12 col-sm-6">
+    <div className="col-md-12 col-sm-6 text-content">
       <div className="post post-list clearfix">
         <div className="thumb rounded pb-4">
           <span className="post-format-sm">
@@ -65,11 +85,11 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                   <Image
                     src={
                       user.imageUrl !== null
-                        ? '/static/nlogo.png'
+                        ? "/static/nlogo.png"
                         : `${API_URL}image/1.jpg`
                     }
                     className="author-picture mr-2"
-                    alt="author" 
+                    alt="author"
                     width={60}
                     height={50}
                     layout="intrinsic"
@@ -104,7 +124,7 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
               <a>{short.shortText(title, 50)}</a>
             </Link>
           </h5>
-          <p className="excerpt mb-0">{textPost}</p>
+          <span className="excerpt mb-0 ">{textPost}</span>
         </div>
       </div>
     </div>

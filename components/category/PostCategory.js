@@ -124,7 +124,7 @@ const PostCategory = ({ post , col = "col-sm-6"}) => {
               <a>{short.shortText(post.title, 50)}</a>
             </Link>
           </h5>
-          <p className="excerpt mb-0">{textPost}</p>
+          <span className="excerpt mb-0">{textPost}</span>
         </div>
       </div>
     </div>

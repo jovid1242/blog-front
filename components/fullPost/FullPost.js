@@ -7,6 +7,7 @@ import { fetchAuthors } from "../../redux/slices/users";
 
 // utils
 import { getAuthors } from "../../utils/author";
+import { convertDataToHtml } from "../../utils/convertDataToHtml";
 
 // parser html
 import ReactHtmlParser from "react-html-parser";
@@ -23,10 +24,25 @@ const FullPost = ({ post }) => {
   const { users } = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  const user = getAuthors.getAuthor(users.items, post.user_id);
+  const user = getAuthors.getAuthor(users.items, post.user_id); 
 
-  const parseText = () => {
-    var textPostToHtml = ReactHtmlParser(post.text);
+  const IsJsonString = (str) => {
+    try {
+      JSON.parse(post.text);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
+  const parseText = () => { 
+    if (IsJsonString()) {
+      var textPostToHtml = ReactHtmlParser(
+        convertDataToHtml(JSON.parse(post.text).blocks)
+      );
+    } else {
+      var textPostToHtml = ReactHtmlParser(post.text);
+    }
     setTextPost(textPostToHtml);
   };
 
@@ -55,7 +71,7 @@ const FullPost = ({ post }) => {
                           : `${API_URL}image/1.jpg`
                       }
                       className="w40 mr-2 avatar-img"
-                      alt="author" 
+                      alt="author"
                       width={40}
                       height={40}
                       layout="intrinsic"

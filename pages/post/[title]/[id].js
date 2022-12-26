@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import FullPost from "../../../components/fullPost/FullPost";
@@ -16,7 +17,10 @@ import { translitRuEnLowercase } from "../../../utils/translateUrl";
 
 const Index = ({ post }) => {
   const dispatch = useDispatch();
-  dispatch(fetchCategory());
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
   return (
     <div className={styles.container}>
       <Head>
