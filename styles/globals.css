@@ -292,4 +292,7 @@ pre code {
         height: 200px !important;
         object-fit: cover !important;
     }
+    .slick-dots-bottom {
+        display: none !important;
+    }
 }
