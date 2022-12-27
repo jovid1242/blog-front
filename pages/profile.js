@@ -45,7 +45,8 @@ export default function Profile() {
         <ProfileHeader user={user} />
         <div className="row mt-4">
           <div className="col-lg-12">
-            <NewPost /> 
+            <NewPost />
+            {/* <UserPosts /> */}
           </div>
         </div>
       </div>

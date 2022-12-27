@@ -190,7 +190,7 @@ const Header = () => {
             ) : (
               <li className="nav-item">
                 <Link href="/profile">
-                  <a className="nav-link">Профиль</a>
+                  <a className="nav-link">Публикация</a>
                 </Link>
               </li>
             )}

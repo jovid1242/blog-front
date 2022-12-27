@@ -11,14 +11,12 @@ import http from "../http";
 import { addPost, setLoad } from "../../redux/slices/author/author";
 import { fetchCategory } from "../../redux/slices/category";
 
-// styles
-
 import dynamic from "next/dynamic";
 const Jjeditor = dynamic(() => import("../editor/editorjs/Editor"), {
   ssr: false,
 });
-import styles from "../../styles/profile.module.scss";
-// import Jjeditor from "";
+
+import styles from "../../styles/profile.module.scss"; 
 
 const NewPost = () => {
   const dispatch = useDispatch();
@@ -52,7 +50,7 @@ const NewPost = () => {
         dispatch(addPost(res.data.data));
       })
       .catch(function (errors) {
-        toast.error(`Упс, ошибка, ${errors.message}`);
+        toast.error("Упс, ошибка при загрузка файла , ( размер изображение должен быть меньше 400-600кб)");
       })
       .finally(() => {
         dispatch(setLoad(false));
