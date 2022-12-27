@@ -17,7 +17,7 @@ const LSidebar = ({ posts }) => {
 
   return (
     <div className="col-lg-8">
-      <div className="section-header">
+      {/* <div className="section-header">
         <h3 className="section-title">Последние посты</h3>
         <div className="w-auto-40">
           <Image
@@ -29,9 +29,9 @@ const LSidebar = ({ posts }) => {
             alt="wave"
           />
         </div>
-      </div>
+      </div> */}
 
-      <div className="padding-30 rounded bordered">
+      <div className="padding-10">
         <div className="row">
           {!posts.length ? (
             posts?.items?.slice(0, limit).map((post) => {
