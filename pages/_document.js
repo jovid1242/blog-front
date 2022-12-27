@@ -8,6 +8,7 @@ export default function Document() {
           rel="stylesheet"
           href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.2/build/styles/default.min.css"
         ></link>
+        <meta name="yandex-verification" content="417f70fd37e0f419" />
       </Head>
       <body>
         <Main />
