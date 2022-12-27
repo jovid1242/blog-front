@@ -47,11 +47,7 @@ const Index = (props) => {
             <div className="site-wrapper">
                 <div className="main-overlay"></div>
                 <Header />
-                <AuthorBanner
-                    name={props.user.user.name}
-                    info={props.user.user?.info}
-                    avatar={props.user.user?.imageUrl}
-                />
+                <AuthorBanner user={props.user.user} status={chekUser} />
                 <section className="main-content">
                     <div className="container-md">
                         <div className="row">
