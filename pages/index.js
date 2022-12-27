@@ -12,6 +12,7 @@ import Hero from "../components/section/Hero";
 import Footer from "../components/footer/Footer";
 import Loading from "../components/loader";
 import Instagran from "../components/instagram";
+// android-chrome-192x192.png
 
 const Home = (props) => {
   const { popularPosts } = useSelector((state) => state.popularPosts);
@@ -24,8 +25,8 @@ const Home = (props) => {
           property="og:description"
           content="Сюда приходят обсудить новости индустрии и поделиться опытом."
         />
-        <title>Repost</title>
-        <meta name="description" content="Repost" />
+        <title>Ofolio</title>
+        <meta name="description" content="Ofolio" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
