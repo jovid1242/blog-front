@@ -6,6 +6,7 @@
     "dev": "next dev -p 8009",
     "build": "next build",
     "start": "next start  -p 8009",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -34,6 +35,7 @@
     "next": "11",
     "next-auth": "^4.10.3",
     "next-redux-wrapper": "^7.0.5",
+    "next-sitemap": "^3.1.43",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-html-parser": "^2.0.2",
