@@ -12,13 +12,13 @@ import ReactHtmlParser from 'react-html-parser'
 import { short } from '../../utils/short'
 import { getAuthors } from '../../utils/author'
 import { translitRuEnLowercase } from '../../utils/translateUrl'
+import { convertDataToHtml } from '../../utils/convertDataToHtml'
 
 // api
 import { API_URL } from '../api'
 
 // moment
 import 'moment/locale/ru'
-import { convertDataToHtml } from '../../utils/convertDataToHtml'
 moment.locale('ru')
 
 const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
