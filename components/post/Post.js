@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import Link from 'next/link'
@@ -22,7 +22,6 @@ import 'moment/locale/ru'
 moment.locale('ru')
 
 const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
-    const [textPost, setTextPost] = useState('')
     const { users } = useSelector((state) => state.users)
 
     const user = getAuthors.getAuthor(users.items, user_id)
@@ -37,24 +36,14 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
     }
 
     const parseText = () => {
-        if (IsJsonString(text)) {
-            const textPostToHtml = ReactHtmlParser(
-                convertDataToHtml(JSON.parse(text).blocks)
-            ) 
-            setTextPost(
-                short.shortText(textPostToHtml[0].props.children[0], 160)
-            )
+        if (IsJsonString(text)) { 
+            return ReactHtmlParser(short.shortText(convertDataToHtml(JSON.parse(text).blocks), 150))
         } else {
-            const textPostToHtml = ReactHtmlParser(short.shortText(text, 160))
-            setTextPost(textPostToHtml)
+            return ReactHtmlParser(short.shortText(text, 160))
         }
     }
 
-    useEffect(() => {
-        parseText()
-    }, [])
-
-    return ( 
+    return (
         <div className="post post-classic rounded bordered p-0">
             <div className="thumb top-rounded">
                 <span className="post-format">
@@ -113,7 +102,7 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                         <a target="_blank">{title}</a>
                     </Link>
                 </h5>
-                <span className="excerpt mb-0">{textPost}</span>
+                <span className="excerpt mb-0">{parseText(text)}</span>
             </div>
             <div className="post-bottom clearfix d-flex align-items-center">
                 <div className="float-end d-none d-md-block">
@@ -123,7 +112,7 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                             <i className="icon-arrow-right" />
                         </a>
                     </Link>
-                </div> 
+                </div>
             </div>
         </div>
     )
