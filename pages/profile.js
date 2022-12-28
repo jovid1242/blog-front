@@ -10,7 +10,7 @@ import Loading from "../components/loader";
 import http from "../components/http";
 import ProfileHeader from "../components/profile/profileHeader";
 import NewPost from "../components/profile/newPost";
-import UserPosts from '../components/profile/userPosts'
+// import UserPosts from '../components/profile/userPosts'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthorPosts } from "../redux/slices/author/author";
 
@@ -46,7 +46,7 @@ export default function Profile() {
         <div className="row mt-4">
           <div className="col-lg-12">
             <NewPost />
-            <UserPosts />
+            {/* <UserPosts /> */}
           </div>
         </div>
       </div>
