@@ -50,7 +50,7 @@ const Hero = () => {
                 <ul className="meta list-inline mb-0">
                   <li className="list-inline-item">
                     <Link href="/">
-                      <a>Repost</a>
+                      <a>Ofolio</a>
                     </Link>
                   </li>
                   <li className="list-inline-item">Сегодня в 00:01</li>

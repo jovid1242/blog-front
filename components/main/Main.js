@@ -4,7 +4,7 @@ import { fetchAuthors } from "../../redux/slices/users";
 import LSidebar from "../sidebar/LSidebar";
 import Sidebar from "../sidebar/Sidebar";
 
-const Main = ({ store }) => {
+const Main = ({ posts }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Main = ({ store }) => {
     <section className="main-content">
       <div className="container-xl">
         <div className="row gy-4">
-          <LSidebar posts={store.posts.posts} />
+          <LSidebar posts={posts} />
           <Sidebar />
         </div>
       </div>

@@ -4,7 +4,7 @@ export const getAuthors = {
     if (username.length > 0) {
       return username[0];
     }
-    return "Repost";
+    return "Ofolio";
   },
 
   getAuthorName: (users, author) => {
@@ -12,6 +12,6 @@ export const getAuthors = {
     if (username.length > 0) {
       return username[0].name;
     }
-    return "Repost";
+    return "Ofolio";
   },
 };

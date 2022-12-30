@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { fetchCategory } from "../../redux/slices/category";
@@ -15,6 +15,29 @@ import PostCategory from "../../components/category/PostCategory";
 const Index = (props) => {
   const dispatch = useDispatch();
 
+  const [limit, setLimit] = useState(6)
+
+  useEffect(() => {
+      document.addEventListener('scroll', scrollHandler)
+      return function () {
+          document.removeEventListener('scroll', scrollHandler)
+      }
+  }, [])
+
+  const fethcNewsPosts = () => {
+      setLimit(prev => prev + 3)
+  }
+
+  const scrollHandler = (e) => {
+      if (
+          e.target.documentElement.scrollHeight -
+              (e.target.documentElement.scrollTop + window.innerHeight) <
+          100
+      ) {
+          fethcNewsPosts()
+      }
+  }
+
   useEffect(() => {
     dispatch(fetchCategory());
   }, []);
@@ -23,8 +46,8 @@ const Index = (props) => {
     <div>
       <Head>
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Repost</title>
-        <meta name="description" content="Repost" />
+        <title>Ofolio</title>
+        <meta name="description" content="Ofolio" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -38,7 +61,7 @@ const Index = (props) => {
           <div className="container-md">
             <div className="row">
               {props?.rows.length > 0 ? (
-                props.rows.map((post) => {
+                props?.rows?.slice(0, limit).map((post) => {
                   return (
                     <PostCategory
                       post={post}

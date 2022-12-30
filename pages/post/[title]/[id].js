@@ -28,7 +28,7 @@ const Index = ({ post }) => {
         <meta property="og:title" content={post.title} />
         <meta property="og:image" content={post.imageUrl} />
         <meta property="og:description" content={post.title} />
-        <title>Repost | {post.title}</title>
+        <title>Ofolio | {post.title}</title>
         <meta name="description" content={post.title} />
         <meta
           name="viewport"

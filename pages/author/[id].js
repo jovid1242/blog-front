@@ -26,6 +26,29 @@ const Index = (props) => {
         })
     }
 
+    const [limit, setLimit] = useState(6)
+
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler)
+        return function () {
+            document.removeEventListener('scroll', scrollHandler)
+        }
+    }, [])
+
+    const fethcNewsPosts = () => {
+        setLimit((prev) => prev + 3)
+    }
+
+    const scrollHandler = (e) => {
+        if (
+            e.target.documentElement.scrollHeight -
+                (e.target.documentElement.scrollTop + window.innerHeight) <
+            100
+        ) {
+            fethcNewsPosts()
+        }
+    }
+
     useEffect(() => {
         getUser()
     }, [])
@@ -37,8 +60,8 @@ const Index = (props) => {
                     httpEquiv="Content-Type"
                     content="text/html; charset=UTF-8"
                 />
-                <title>Repost</title>
-                <meta name="description" content="Repost" />
+                <title>Ofolio</title>
+                <meta name="description" content="Ofolio" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1, maximum-scale=1"
@@ -52,7 +75,7 @@ const Index = (props) => {
                     <div className="container-md">
                         <div className="row">
                             {props.post?.rows.length > 0 ? (
-                                props.post.rows.map((post) => {
+                                props.post.rows.slice(0, limit).map((post) => {
                                     return (
                                         <PostCategory
                                             post={post}

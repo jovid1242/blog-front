@@ -9,7 +9,7 @@ const Insta = () => {
             href="https://instagram.com/jovid92002"
             className="btn btn-default btn-instagram"
           >
-            @Repost on Instagram
+            @ofolio on Instagram
           </a>
           <div className="instagram-feed d-flex flex-wrap">
             <div className="insta-item col-sm-2 col-6 col-md-2">

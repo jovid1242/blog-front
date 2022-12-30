@@ -20,7 +20,7 @@ const Home = (props) => {
     <div>
       <Head>
         <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta property="og:title" content="Repost digital posts" />
+        <meta property="og:title" content="Ofolio digital posts" />
         <meta
           property="og:description"
           content="Сюда приходят обсудить новости индустрии и поделиться опытом."
@@ -37,7 +37,7 @@ const Home = (props) => {
         <div className="main-overlay"></div>
         <Header store={props} />
         <Hero />
-        <Main store={props} />
+        <Main posts={props.posts.posts} />
         <div className="spacer" data-height="50"></div>
         <Instagran />
         <Footer />
