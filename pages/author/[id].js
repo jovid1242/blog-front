@@ -14,6 +14,9 @@ import PostCategory from '../../components/category/PostCategory'
 
 const Index = (props) => {
     const [chekUser, setChekUser] = useState(false)
+    const [posts, setPosts] = useState([])
+    const [author, setAuthor] = useState({}) 
+    const [limit, setLimit] = useState(6)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -24,9 +27,13 @@ const Index = (props) => {
         http.get('/auth/me').then((res) => {
             setChekUser(props.user.user.id === res.data.user.id ? true : false)
         })
+        http.get(`/author/${props.id}/posts`).then((res) => {
+            setPosts(res.data.posts)
+        })
+        http.get(`/user/${props.id}`).then((res) => {
+            setAuthor(res.data)
+        })
     }
-
-    const [limit, setLimit] = useState(6)
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -47,7 +54,7 @@ const Index = (props) => {
         ) {
             fethcNewsPosts()
         }
-    }
+    } 
 
     useEffect(() => {
         getUser()
@@ -70,12 +77,12 @@ const Index = (props) => {
             <div className="site-wrapper">
                 <div className="main-overlay"></div>
                 <Header />
-                <AuthorBanner user={props.user.user} status={chekUser} />
+                <AuthorBanner author={author.user} status={true} />
                 <section className="main-content">
                     <div className="container-md">
                         <div className="row">
-                            {props.post?.rows.length > 0 ? (
-                                props.post.rows.slice(0, limit).map((post) => {
+                            {posts?.rows?.length > 0 ? (
+                                posts?.rows?.slice(0, limit)?.map((post) => {
                                     return (
                                         <PostCategory
                                             post={post}
@@ -100,23 +107,23 @@ const Index = (props) => {
 }
 
 export async function getServerSideProps({ params }) {
-    let post = {}
-    let user = {}
-    await http.get(`/author/${params.id}/posts`).then((res) => {
-        post = res.data.posts
-    })
-    await http.get(`/user/${params.id}`).then((res) => {
-        user = res.data
-    })
+    // let post = {}
+    // let user = {}
+    // await http.get(`/author/${params.id}/posts`).then((res) => {
+    //     post = res.data.posts
+    // })
+    // await http.get(`/user/${params.id}`).then((res) => {
+    //     user = res.data
+    // })
 
-    if (Object.keys(post).length == 0) {
-        return {
-            notFound: true,
-        }
-    }
+    // if (Object.keys(post).length == 0) {
+    //     return {
+    //         notFound: true,
+    //     }
+    // }
 
     return {
-        props: { post, user }, // will be passed to the page component as props
+        props: { id: params.id }, // will be passed to the page component as props
     }
 }
 

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import Link from 'next/link'
@@ -55,8 +54,9 @@ const Post = ({ title, text, id, date, imageUrl, user_id, view }) => {
                             <Image
                                 src={`${API_URL}image/${imageUrl}`}
                                 width={1000}
-                                height={460}
-                                layout="intrinsic"
+                                height={500}
+                                className="imgCover"
+                                priority
                                 alt="post-title"
                             />
                         </div>

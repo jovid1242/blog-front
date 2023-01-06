@@ -1,19 +1,35 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getCookie } from 'cookies-next'
 
 import { Popover } from 'antd'
 import { API_URL } from '../api'
 import EditUser from '../profile/editUser'
 
-const AuthorBanner = ({ user, status }) => {
+const AuthorBanner = ({ author }) => {
     const [open, setOpen] = useState(false)
+    const [user, setUser] = useState(false)
+    console.log('=---author---', author)
+
+    function parseJwt(token) {
+        if (!token) {
+            return
+        }
+        const base64Url = token.split('.')[1]
+        const base64 = base64Url.replace('-', '+').replace('_', '/')
+        return JSON.parse(window.atob(base64))
+    }
 
     const content = (
         <div onClick={() => setOpen(true)} className="cursorp">
             <p>Изменить информацию</p>
         </div>
     )
+
+    useEffect(() => {
+        setUser(parseJwt(getCookie('token')))
+    }, [])
 
     return (
         <>
@@ -24,15 +40,16 @@ const AuthorBanner = ({ user, status }) => {
             >
                 <div className="container-xl">
                     <div className="cta text-center">
-                        {status ? (
+                        {user ? (
                             <Popover content={content} title={false}>
                                 <Image
                                     src={
-                                        !user.imageUrl
+                                        !author?.imageUrl ||
+                                        author?.imageUrl === null
                                             ? '/static/insta-2.jpg'
-                                            : `${API_URL}image/${user.imageUrl}`
+                                            : `${API_URL}image/${author.imageUrl}`
                                     }
-                                    className="w40 mr-2 border50 cursorp"
+                                    className="w40 mr-2 border50 cursorp post-image"
                                     alt="author"
                                     width={130}
                                     height={130}
@@ -42,11 +59,12 @@ const AuthorBanner = ({ user, status }) => {
                         ) : (
                             <Image
                                 src={
-                                    !user.imageUrl
+                                    !author?.imageUrl ||
+                                    author?.imageUrl === null
                                         ? '/static/insta-2.jpg'
-                                        : `${API_URL}image/${user.imageUrl}`
+                                        : `${API_URL}image/${author.imageUrl}`
                                 }
-                                className="w40 mr-2 border50"
+                                className="w40 mr-2 border50 post-image"
                                 alt="author"
                                 width={130}
                                 height={130}
@@ -54,10 +72,10 @@ const AuthorBanner = ({ user, status }) => {
                             />
                         )}
 
-                        <h2 className={'mt-0 mb-2 ' + user.imageUrl}>
-                            {user.name}
+                        {/* <h2 className={'mt-0 mb-2 ' + user?.imageUrl}>
+                            {user?.name}
                         </h2>
-                        <Link href={user.social}>
+                        <Link href={user?.social}>
                             <a className="mb-4" target="_blank">
                                 <i
                                     className="icon-social-instagram"
@@ -66,8 +84,8 @@ const AuthorBanner = ({ user, status }) => {
                             </a>
                         </Link>
                         <p className="mt-0">
-                            {user.info !== null ? (
-                                user.info
+                            {user?.info !== null ? (
+                                user?.info
                             ) : (
                                 <>
                                     Hello, I’m a content writer who is
@@ -76,7 +94,7 @@ const AuthorBanner = ({ user, status }) => {
                                     content to the right people.
                                 </>
                             )}
-                        </p>
+                        </p> */}
                     </div>
                 </div>
                 <span className="mouse mt-4">

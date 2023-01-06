@@ -21,7 +21,7 @@ export default function Profile() {
   const route = useRouter();
 
   const getUser = () => {
-    dispatch(fetchAuthorPosts());
+    dispatch(fetchAuthorPosts()); // 
     http
       .get("/auth/me")
       .then((res) => {

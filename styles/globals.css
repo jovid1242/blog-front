@@ -283,6 +283,10 @@ pre code {
     cursor: pointer;
 }
 
+.post-image {
+    object-fit: cover;
+}
+
 @media only screen and (max-width: 767px) {
     /* .post-head {
         flex-direction: column;
