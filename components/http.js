@@ -1,7 +1,8 @@
 import axios from "axios";
 
 import { setCookie, getCookie } from "cookies-next";
-export const API_URL = `https://api.ofolio.ru/api/`;
+export const API_URL1 = `https://api.ofolio.ru/api/`;
+export const API_URL = `http://localhost:9001/api/`;
 
 const $api = axios.create({
   withCredentials: false,

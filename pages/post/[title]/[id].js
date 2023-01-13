@@ -38,7 +38,7 @@ const Index = ({ post }) => {
       <div className="site-wrapper">
         <div className="main-overlay"></div>
 
-        <Header />
+        {/* <Header /> */}
         <section className="main-content">
           <div className="container-xl">
             <div className="row gy-4">
